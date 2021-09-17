@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapLoader : MonoBehaviour
 {
-    [SerializeField] private Maps _maps;
+    [SerializeField] private MapsHolder _maps;
     [SerializeField] private Transform _planetContainer;
     [SerializeField] private Transform _planetsUIConteiner;
     
