@@ -6,11 +6,11 @@ using UnityEngine;
 public class Maps : ScriptableObject
 {
     [SerializeField] private List<Map> _maps;
-    [SerializeField] private Map _earth;
-    [SerializeField] private Map _mars;
+    //[SerializeField] private Map _earth;
+    //[SerializeField] private Map _mars;
 
-    public Map Earth => _earth;
-    public Map Mars => _mars;
+    //public Map Earth => _earth;
+    //public Map Mars => _mars;
 
     public Map GetMap(string name)
     {
@@ -21,6 +21,11 @@ public class Maps : ScriptableObject
 [System.Serializable]
 public class Map
 {
+    public enum AccessType { Available = 1, Locked}
+
     public string Name;
-    public GameObject Prefab; 
+    public GameObject Prefab;
+    public int Cost;
+    public AccessType Access;
+    public Sprite Preview;
 }

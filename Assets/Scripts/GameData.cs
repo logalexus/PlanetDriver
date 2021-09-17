@@ -13,5 +13,6 @@ public class GameData
     public bool MusicActive = true;
     public bool SoundActive = true;
     public bool PostProcActive = true;
-    public Map Map;
+    public string Map;
+    public string[] AvailableMaps;
 }
