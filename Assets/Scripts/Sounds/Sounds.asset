@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e536a2b0f0b05847bab5c7ae718eb39, type: 3}
+  m_Name: Sounds
+  m_EditorClassIdentifier: 
+  _mainTheme: {fileID: 8300000, guid: 148a4179e3347154ea3d61cda50a004d, type: 3}
+  _click: {fileID: 8300000, guid: 6e8772b49f34d402a90016ed445d8a2f, type: 3}
+  _engine: {fileID: 8300000, guid: bb683044c23cd50438d45fe475089c84, type: 3}
+  _coin: {fileID: 8300000, guid: faf94ef569e6166499c2bfc0103c18a4, type: 3}
+  _collision: {fileID: 8300000, guid: bd342762e886d41439fce9bf1cdeebe9, type: 3}
