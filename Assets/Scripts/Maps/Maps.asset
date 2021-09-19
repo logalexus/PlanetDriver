@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maps:
   - Name: Earth
-    Prefab: {fileID: 5136487189940499756, guid: ba9746fbecc0e5f459a07667b9a3b15d, type: 3}
+    Prefab: {fileID: 5762803672592680049, guid: 5504d9e66fa1ef347bcfb272ed6ed3f1, type: 3}
     Cost: 0
     Access: 1
     Preview: {fileID: 21300000, guid: 082d3035046cf6f438525175c0e571df, type: 3}
