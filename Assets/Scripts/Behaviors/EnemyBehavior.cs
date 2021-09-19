@@ -10,6 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private LayerMask _mask;
     [SerializeField] private float _speed = 7f;
 
+    private float _radius = 25f;
     private bool _isMoving = true;
     private bool _isDestroyable = false;
     
@@ -43,7 +44,7 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("Crush"))
         {
             _isMoving = false;
-            if (!Physics.CheckSphere(transform.position, 25f, _mask))
+            if (!Physics.CheckSphere(transform.position, _radius, _mask))
             {
                 gameObject.SetActive(false);
             }

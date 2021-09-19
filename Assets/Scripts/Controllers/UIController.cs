@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class UIController : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private List<UIScreen> _screens = new List<UIScreen>();
 
     private UIScreen _activeScreen;
+
 
     private void Awake()
     {
@@ -47,8 +49,7 @@ public class UIController : MonoBehaviour
     {
         return _screens.OfType<T>().FirstOrDefault();
     }
-
-
+    
 
     
 }

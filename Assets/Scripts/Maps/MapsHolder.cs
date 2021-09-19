@@ -24,4 +24,5 @@ public class Map
     public int Cost;
     public Enums.AccessType Access;
     public Sprite Preview;
+    public Material SkyBox;
 }

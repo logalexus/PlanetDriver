@@ -17,6 +17,7 @@ public class MainMenuScreen : UIScreen
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _coinCounter;
     [SerializeField] private TextMeshProUGUI _levelCounter;
+    [SerializeField] private TextMeshProUGUI _mapName;
     [Header("Bars")]
     [SerializeField] private Slider _levelBar;
     
@@ -24,7 +25,8 @@ public class MainMenuScreen : UIScreen
     {
         Player player = Player.Instance;
         UIController uiController = UIController.Instance;
-
+        MapLoader mapLoader = MapLoader.Instance;
+        
         _start.onClick.AddListener(()=> 
         {
             GameController.Instance.OnGameStart();
@@ -64,6 +66,11 @@ public class MainMenuScreen : UIScreen
         player.ExpChanged += () =>
         {
             _levelBar.value = player.Exp;
+        };
+
+        mapLoader.PlanetChanged += (name) =>
+        {
+            _mapName.text = name;
         };
     }
 

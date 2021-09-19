@@ -62,7 +62,7 @@ public class PlanetsScreen : UIScreen
             UIMap mapUI = Instantiate(_uiMap);
             mapUI.SetMapUI(_mapsHolder.Maps[i]);
             _scroller.AddChild(mapUI.gameObject);
-            _scroller.GoToScreen(_mapsHolder.Maps.Count - 1);
         }
+        _scroller.GoToScreen(_mapsHolder.Maps.Count - 1);
     }
 }
