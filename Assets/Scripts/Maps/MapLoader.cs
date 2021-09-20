@@ -7,7 +7,7 @@ public class MapLoader : MonoBehaviour
 {
     public static MapLoader Instance;
 
-    [SerializeField] private MapsHolder _maps;
+    [SerializeField] private MapsHolder _mapsHolder;
     [SerializeField] private Transform _planetContainer;
     [SerializeField] private Transform _planetsUIConteiner;
     
@@ -27,7 +27,10 @@ public class MapLoader : MonoBehaviour
     private void Start()
     {
         _dataController = DataController.Instance;
-        SetMap(_maps.GetMap(_dataController.Data.Map));
+        if (_dataController.Data.Map != null)
+            SetMap(_mapsHolder.GetMap(_dataController.Data.Map));
+        else
+            SetMap(_mapsHolder.Maps[0]);
     }
 
     public void SetMap(Map map)

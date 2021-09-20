@@ -9100,7 +9100,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v1.013
+  m_text: v1.015
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
   m_sharedMaterial: {fileID: -7394139710670576184, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
@@ -15090,7 +15090,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be12943b2ee6e4d45a2f3c3ec4746607, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maps: {fileID: 11400000, guid: aeb9a7c5ba88d5640bc3d17cea194c9f, type: 2}
+  _mapsHolder: {fileID: 11400000, guid: aeb9a7c5ba88d5640bc3d17cea194c9f, type: 2}
   _planetContainer: {fileID: 542687121}
   _planetsUIConteiner: {fileID: 289252888}
 --- !u!1 &1270512153
