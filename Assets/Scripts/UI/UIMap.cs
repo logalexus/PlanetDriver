@@ -14,18 +14,45 @@ public class UIMap : MonoBehaviour
     [SerializeField] private Button _selectButton;
 
     public Map CurrentMap => _map;
-
-    private Enums.AccessType _access;
+    
     private Map _map;
+    private UIController uIController;
+
+    public bool AccessMap
+    {
+        get => _map.Access;
+        set
+        {
+            _map.Access = value;
+            _accessPanel.SetActive(value);
+        }
+    }
 
     private void Start()
     {
-        UIController uIController = UIController.Instance;
+        Player player = Player.Instance;
+        uIController = UIController.Instance;
 
         _selectButton.onClick.AddListener(() =>
         {
-            MapLoader.Instance.SetMap(_map);
-            uIController.OpenScreen(uIController.GetScreen<MainMenuScreen>());
+            if (_map.Access)
+                ShowMap();
+            else
+            {
+                if (player.Coins > _map.Cost)
+                {
+                    uIController.PopupCall(() =>
+                    {
+                        player.Coins -= _map.Cost;
+                        AccessMap = true;
+                    });
+                }
+                else
+                {
+                    //
+                }
+            }
+            
         });
     }
 
@@ -35,17 +62,14 @@ public class UIMap : MonoBehaviour
         _name.text = map.Name;
         _cost.text = map.Cost.ToString();
         _mapPreview.sprite = map.Preview;
-        _access = map.Access;
-
-        switch (_access)
-        {
-            case Enums.AccessType.Available:
-                _accessPanel.SetActive(false);
-                break;
-            case Enums.AccessType.Locked:
-                _accessPanel.SetActive(true);
-                break;
-        }
+        _accessPanel.SetActive(_map.Access);
     }
+
+    private void ShowMap()
+    {
+        MapLoader.Instance.SetMap(_map);
+        uIController.OpenScreen(uIController.GetScreen<MainMenuScreen>());
+    }
+
 
 }

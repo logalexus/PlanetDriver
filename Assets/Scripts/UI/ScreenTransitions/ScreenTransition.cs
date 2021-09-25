@@ -8,9 +8,9 @@ public class ScreenTransition : MonoBehaviour
     [SerializeField] protected RectTransform _bottomGroup;
 
     protected CanvasGroup _canvasGroup;
-    protected readonly float _overshot = 1f;
-    protected readonly float _durationOpen = 0.5f;
-    protected readonly float _durationClose = 0.4f;
+    protected float _overshot = 1f;
+    protected float _durationOpen = 0.5f;
+    protected float _durationClose = 0.4f;
     
 
     private void Start()

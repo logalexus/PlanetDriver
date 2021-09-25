@@ -50,6 +50,14 @@ public class UIController : MonoBehaviour
         return _screens.OfType<T>().FirstOrDefault();
     }
     
-
+    public void PopupCall(UnityAction yesClick)
+    {
+        PopupScreen popup = GetScreen<PopupScreen>();
+        popup.Open();
+        popup.YesClick = yesClick;
+        popup.YesClick += () => _activeScreen.SetInteractable(true);
+        popup.NoClick += () => _activeScreen.SetInteractable(true);
+        _activeScreen.SetInteractable(false);
+    }
     
 }

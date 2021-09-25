@@ -22,7 +22,7 @@ public class Map
     public string Name;
     public Planet Prefab;
     public int Cost;
-    public Enums.AccessType Access;
+    public bool Access;
     public Sprite Preview;
     public Material SkyBox;
 }

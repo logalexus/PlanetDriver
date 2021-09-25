@@ -22,18 +22,18 @@ MonoBehaviour:
   - Name: Mars
     Prefab: {fileID: 5762803672592680049, guid: 5504d9e66fa1ef347bcfb272ed6ed3f1, type: 3}
     Cost: 50
-    Access: 2
+    Access: 1
     Preview: {fileID: 21300000, guid: 5fa11f0252d712e438a9808cefd7d8d0, type: 3}
     SkyBox: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   - Name: Saturn
     Prefab: {fileID: 5136487189940499756, guid: ba9746fbecc0e5f459a07667b9a3b15d, type: 3}
     Cost: 100
-    Access: 2
+    Access: 0
     Preview: {fileID: 21300000, guid: 80f78ee90dcb952428b19d60ff462b69, type: 3}
     SkyBox: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}
   - Name: Moon
     Prefab: {fileID: 5136487189940499756, guid: ba9746fbecc0e5f459a07667b9a3b15d, type: 3}
     Cost: 300
-    Access: 2
+    Access: 0
     Preview: {fileID: 21300000, guid: 80f78ee90dcb952428b19d60ff462b69, type: 3}
     SkyBox: {fileID: 2100000, guid: 1cf6f4c6e6e0518419839d3f5448dd99, type: 2}

@@ -21,4 +21,11 @@ public class UIScreen : MonoBehaviour
     {
         _canvas.enabled = false;
     }
+
+    public void SetInteractable(bool value)
+    {
+        _canvasGroup.interactable = value;
+        _canvasGroup.blocksRaycasts = value;
+
+    }
 }

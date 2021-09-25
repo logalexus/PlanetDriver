@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 [Serializable]
 public class GameData
 {
-    public int Coins;
+    public int Coins = 1000;
     public int Level = 1;
     public int Exp;
     public bool MusicActive = true;
