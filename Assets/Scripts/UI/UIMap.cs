@@ -7,6 +7,7 @@ public class UIMap : MonoBehaviour
 {
     [SerializeField] private GameObject _accessPanel;
     [SerializeField] private Image _mapPreview;
+    [SerializeField] private MapWarningAnimation _mapWarning;
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _cost;
@@ -39,17 +40,18 @@ public class UIMap : MonoBehaviour
                 ShowMap();
             else
             {
-                if (player.Coins > _map.Cost)
+                if (player.Coins >= _map.Cost)
                 {
                     uIController.PopupCall(() =>
                     {
                         player.Coins -= _map.Cost;
                         AccessMap = true;
                     });
+                    MapLoader.Instance.SaveAvailableMap(_map.Name);
                 }
                 else
                 {
-                    //
+                    _mapWarning.StartAnimation();
                 }
             }
             

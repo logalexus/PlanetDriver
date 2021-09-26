@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -12,7 +13,8 @@ public class MapLoader : MonoBehaviour
     [SerializeField] private Transform _planetsUIConteiner;
     
     private DataController _dataController;
-
+    private List<string> _availableMaps;
+    
     public UnityAction<string> PlanetChanged;
 
 
@@ -27,6 +29,9 @@ public class MapLoader : MonoBehaviour
     private void Start()
     {
         _dataController = DataController.Instance;
+        _availableMaps = _dataController.Data.AvailableMaps;
+        SeAccessAvailableMaps(_availableMaps);
+
         if (_dataController.Data.Map != null)
             SetMap(_mapsHolder.GetMap(_dataController.Data.Map));
         else
@@ -45,5 +50,17 @@ public class MapLoader : MonoBehaviour
         RenderSettings.skybox = map.SkyBox;
 
         PlanetChanged?.Invoke(map.Name);
+    }
+
+    private void SeAccessAvailableMaps(List<string> availableMaps)
+    {
+        foreach (var map in availableMaps)
+            _mapsHolder.GetMap(map).Access = true;
+    }
+
+    public void SaveAvailableMap(string mapName)
+    {
+        _availableMaps.Add(mapName);
+        _dataController.Save();
     }
 }

@@ -21,7 +21,7 @@ public class PlanetsScreen : UIScreen
 
     private DataController _dataController;
 
-    private void Start()
+    private IEnumerator Start()
     {
         Player player = Player.Instance;
         UIController uiController = UIController.Instance;
@@ -41,6 +41,8 @@ public class PlanetsScreen : UIScreen
         {
             _levelCounter.text = $"lvl {player.Level}";
         };
+
+        yield return null;
         SetMapsUI();
     }
 

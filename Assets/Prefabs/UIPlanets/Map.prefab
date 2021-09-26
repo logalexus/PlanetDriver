@@ -868,6 +868,7 @@ GameObject:
   - component: {fileID: 7939100267815865486}
   - component: {fileID: -6984754260957168964}
   - component: {fileID: 348283090503558075}
+  - component: {fileID: 4921302252093513054}
   - component: {fileID: -7103369324555510152}
   m_Layer: 5
   m_Name: Map
@@ -914,6 +915,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _accessPanel: {fileID: 1111811495832799506}
   _mapPreview: {fileID: 7939100267702535561}
+  _mapWarning: {fileID: 4921302252093513054}
   _name: {fileID: 7939100268177382182}
   _cost: {fileID: 7939100266895121076}
   _selectButton: {fileID: 348283090503558075}
@@ -961,6 +963,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4921302252093513054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939100267815865487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfb62f9469e395c49ba4ef74f38fd695, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _map: {fileID: 7939100267815865486}
 --- !u!95 &-7103369324555510152
 Animator:
   serializedVersion: 3

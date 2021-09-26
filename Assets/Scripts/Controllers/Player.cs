@@ -144,7 +144,7 @@ public class Player : MonoBehaviour
 
     public void CoinCollecting()
     {
-        CollectedCoinsInGame++;
+        CollectedCoinsInGame+=1000;
         _audioController.PlaySFX(_audioController.Sounds.Coin);
     }
 
