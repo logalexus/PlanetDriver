@@ -8674,6 +8674,7 @@ GameObject:
   - component: {fileID: 8562415628239249592}
   - component: {fileID: 5852208827564610674}
   - component: {fileID: 5347959257504118184}
+  - component: {fileID: 4120256744058838134}
   m_Layer: 0
   m_Name: Break2(Polybrush Clone)
   m_TagString: Crush
@@ -8688,13 +8689,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5347959257504118183}
-  m_LocalRotation: {x: 0.01065089, y: 0.031949174, z: -0.2678791, w: 0.9628638}
-  m_LocalPosition: {x: 0.549, y: 0.636, z: 0.195}
+  m_LocalRotation: {x: 0.005779307, y: 0.03517853, z: -0.27749392, w: 0.9600657}
+  m_LocalPosition: {x: 0.5402, y: 0.6215, z: 0.195}
   m_LocalScale: {x: 0.14693312, y: 0.14693311, z: 0.14693314}
   m_Children: []
   m_Father: {fileID: 5113464976221566835}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 2.156, y: 3.202, z: -31.034}
+  m_LocalEulerAnglesHint: {x: 1.755, y: 3.691, z: -32.186}
 --- !u!33 &8562415628239249592
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -8758,6 +8759,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2228417370725966487, guid: 7c3e3d81f761e5a4cbbcdb52b90ec230, type: 3}
+--- !u!114 &4120256744058838134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347959257504118183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5347959257740797362
 GameObject:
   m_ObjectHideFlags: 0
@@ -9012,7 +9025,8 @@ GameObject:
   - component: {fileID: 4718668709553205910}
   - component: {fileID: 8562415626615029043}
   - component: {fileID: 5852208829096561145}
-  - component: {fileID: 5347959258146875437}
+  - component: {fileID: 8896782882480959864}
+  - component: {fileID: 2437519865495875216}
   m_Layer: 0
   m_Name: Break1(Polybrush Clone)
   m_TagString: Crush
@@ -9083,7 +9097,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &5347959258146875437
+--- !u!64 &8896782882480959864
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9097,6 +9111,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 2212009239438826721, guid: 282a228494dc79e40b53e87ae6c08521, type: 3}
+--- !u!114 &2437519865495875216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347959258146875436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5347959258218309124
 GameObject:
   m_ObjectHideFlags: 0
@@ -9190,6 +9216,7 @@ GameObject:
   - component: {fileID: 8562415626427937342}
   - component: {fileID: 5852208828706014964}
   - component: {fileID: 5347959258241754914}
+  - component: {fileID: 3632613597390653674}
   m_Layer: 0
   m_Name: Break2(Polybrush Clone)
   m_TagString: Crush
@@ -9274,6 +9301,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2228417370725966487, guid: 7c3e3d81f761e5a4cbbcdb52b90ec230, type: 3}
+--- !u!114 &3632613597390653674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347959258241754913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5347959258271823728
 GameObject:
   m_ObjectHideFlags: 0

@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 1931492124366575265}
   - component: {fileID: 1931492124366575264}
   - component: {fileID: 1931492124366575267}
+  - component: {fileID: 720791529861671329}
   m_Layer: 0
   m_Name: tree2 (1)
   m_TagString: Crush
@@ -177,6 +178,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: cda31171a3a69564ead4361248b742b2, type: 3}
+--- !u!114 &720791529861671329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492124366575293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492124455672736
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +202,7 @@ GameObject:
   - component: {fileID: 1931492124455672740}
   - component: {fileID: 1931492124455672743}
   - component: {fileID: 1931492124455672742}
+  - component: {fileID: 5839936538230434358}
   m_Layer: 0
   m_Name: tree (1)
   m_TagString: Crush
@@ -273,6 +287,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4493585093827132993, guid: 1e3e260e0f5f95449a95f4e6b5f96688, type: 3}
+--- !u!114 &5839936538230434358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492124455672736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492124457356417
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +311,7 @@ GameObject:
   - component: {fileID: 1931492124457356421}
   - component: {fileID: 1931492124457356420}
   - component: {fileID: 1931492124457356423}
+  - component: {fileID: 1932353114742059285}
   m_Layer: 0
   m_Name: tree2 (2)
   m_TagString: Crush
@@ -369,6 +396,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -462981019419857548, guid: cda31171a3a69564ead4361248b742b2, type: 3}
+--- !u!114 &1932353114742059285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492124457356417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492124492884318
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +755,8 @@ GameObject:
   - component: {fileID: 1931492124800419371}
   - component: {fileID: 1931492124800419374}
   - component: {fileID: 1931492124800419369}
-  - component: {fileID: 1931492124800419368}
+  - component: {fileID: 6476878359253783231}
+  - component: {fileID: 8191623529157359804}
   m_Layer: 0
   m_Name: tree3 (1)
   m_TagString: Crush
@@ -787,8 +827,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1931492124800419368
-MeshCollider:
+--- !u!65 &6476878359253783231
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -797,10 +837,21 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: 64f081fe6cf3d4c4aa9bc46885143876, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.63496923, y: 5.467856, z: 0.6018992}
+  m_Center: {x: 0.027233128, y: 2.6470242, z: 0.010762166}
+--- !u!114 &8191623529157359804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492124800419370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492124830282750
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1106,8 @@ GameObject:
   - component: {fileID: 1931492125216829629}
   - component: {fileID: 1931492125216829600}
   - component: {fileID: 1931492125216829603}
-  - component: {fileID: 1931492125216829602}
+  - component: {fileID: 1616299661344423922}
+  - component: {fileID: 5635149300750318465}
   m_Layer: 0
   m_Name: tree3
   m_TagString: Crush
@@ -1126,8 +1178,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1931492125216829602
-MeshCollider:
+--- !u!65 &1616299661344423922
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1136,10 +1188,21 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: 64f081fe6cf3d4c4aa9bc46885143876, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.5626394, y: 5.467854, z: 0.63155067}
+  m_Center: {x: -0.039919678, y: 2.6470096, z: -0.0098202545}
+--- !u!114 &5635149300750318465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492125216829628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492125217656586
 GameObject:
   m_ObjectHideFlags: 0
@@ -1151,7 +1214,8 @@ GameObject:
   - component: {fileID: 1931492125217656587}
   - component: {fileID: 1931492125217656590}
   - component: {fileID: 1931492125217656585}
-  - component: {fileID: 1931492125217656584}
+  - component: {fileID: 8490063249378536422}
+  - component: {fileID: 8479478201625440742}
   m_Layer: 0
   m_Name: tree3 (2)
   m_TagString: Crush
@@ -1222,8 +1286,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1931492125217656584
-MeshCollider:
+--- !u!65 &8490063249378536422
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1232,10 +1296,21 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2534964839176971238, guid: 64f081fe6cf3d4c4aa9bc46885143876, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.6319661, y: 5.4678564, z: 0.6125627}
+  m_Center: {x: -0.034429584, y: 2.6469994, z: 0.0005356426}
+--- !u!114 &8479478201625440742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492125217656586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492125361680385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1571,6 +1646,7 @@ GameObject:
   - component: {fileID: 1931492125533719268}
   - component: {fileID: 1931492125533719274}
   - component: {fileID: 1931492125533719269}
+  - component: {fileID: 1912119287391659329}
   m_Layer: 0
   m_Name: tree4 (4)
   m_TagString: Crush
@@ -1641,6 +1717,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1912119287391659329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492125533719271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492125564640650
 GameObject:
   m_ObjectHideFlags: 0
@@ -2626,6 +2714,7 @@ GameObject:
   - component: {fileID: 1931492126126218992}
   - component: {fileID: 1931492126126218995}
   - component: {fileID: 1931492126126218994}
+  - component: {fileID: 158936348811136390}
   m_Layer: 0
   m_Name: tree2
   m_TagString: Crush
@@ -7020,6 +7109,18 @@ MonoBehaviour:
   m_SkinMeshRef: {fileID: 0}
   m_OriginalMeshObject: {fileID: -462981019419857548, guid: cda31171a3a69564ead4361248b742b2, type: 3}
   m_Mode: 0
+--- !u!114 &158936348811136390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492126126218956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492126191170999
 GameObject:
   m_ObjectHideFlags: 0
@@ -7032,6 +7133,7 @@ GameObject:
   - component: {fileID: 1931492126191171003}
   - component: {fileID: 1931492126191171002}
   - component: {fileID: 1931492126191170997}
+  - component: {fileID: 8396449696835864997}
   m_Layer: 0
   m_Name: tree
   m_TagString: Crush
@@ -7116,6 +7218,18 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4493585093827132993, guid: 1e3e260e0f5f95449a95f4e6b5f96688, type: 3}
+--- !u!114 &8396449696835864997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931492126191170999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37e7636260912c1499ecfd3a316600b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1931492126196041398
 GameObject:
   m_ObjectHideFlags: 0

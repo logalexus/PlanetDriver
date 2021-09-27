@@ -25,7 +25,7 @@ public class SettingsScreen : UIScreen
             _musicActive = value;
             _dataController.Data.MusicActive = value;
             _dataController.Save();
-            AudioController.Instance.SetMusicActive(value);
+            AudioController.Instance.SetMusicMute(!value);
         }
     }
     public bool SoundActive
@@ -36,7 +36,7 @@ public class SettingsScreen : UIScreen
             _soundActive = value;
             _dataController.Data.SoundActive = value;
             _dataController.Save();
-            AudioController.Instance.SetSoundActive(value);
+            AudioController.Instance.SetSoundMute(!value);
         }
     }
     public bool PostProcActive

@@ -10,7 +10,7 @@ public class EnemyBehavior : MonoBehaviour
     [SerializeField] private LayerMask _mask;
     [SerializeField] private float _speed = 7f;
 
-    private float _radius = 25f;
+    private float _radius = 30f;
     private bool _isMoving = true;
     private bool _isDestroyable = false;
     
@@ -37,18 +37,22 @@ public class EnemyBehavior : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out EnemyDestroyerMovement destroyer) && _isDestroyable)
             gameObject.SetActive(false);
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Crush"))
+        if (other.gameObject.TryGetComponent(out Crash crash))
         {
             _isMoving = false;
+            _isDestroyable = true;
+
             if (!Physics.CheckSphere(transform.position, _radius, _mask))
             {
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
             
     }
 

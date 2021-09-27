@@ -43,9 +43,7 @@ public class AudioController : MonoBehaviour
         _carSource.volume = 0;
 
         PlayMusic(_sounds.MainTheme);
-
-        //AndroidNativeAudio.makePool();
-        //_click = AndroidNativeAudio.load("Click.wav");
+        
     }
 
     public void PlayMusic(AudioClip music)
@@ -84,15 +82,15 @@ public class AudioController : MonoBehaviour
         _carSource.volume = 0;
     }
 
-    public void SetMusicActive(bool value)
+    public void SetMusicMute(bool value)
     {
-        _musicSource1.enabled = value;
+        _musicSource1.mute = value;
     }
 
-    public void SetSoundActive(bool value)
+    public void SetSoundMute(bool value)
     {
-        _sfxSource.enabled = value;
-        _carSource.enabled = value;
+        _sfxSource.mute = value;
+        _carSource.mute = value;
     }
     
 }
