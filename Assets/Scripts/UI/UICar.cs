@@ -3,10 +3,10 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 
-public class UIMap : MonoBehaviour
+public class UICar : MonoBehaviour
 {
     [SerializeField] private GameObject _accessPanel;
-    [SerializeField] private Image _mapPreview;
+    [SerializeField] private Image _carPreview;
     [SerializeField] private WarningAnimation _mapWarning;
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _name;
@@ -14,15 +14,15 @@ public class UIMap : MonoBehaviour
     [Header("Buttons")]
     [SerializeField] private Button _selectButton;
     
-    private Map _map;
+    private Car _car;
     private UIController uIController;
 
-    public bool AccessMap
+    public bool AccessCar
     {
-        get => _map.Access;
+        get => _car.Access;
         set
         {
-            _map.Access = value;
+            _car.Access = value;
             _accessPanel.SetActive(value);
         }
     }
@@ -34,42 +34,42 @@ public class UIMap : MonoBehaviour
 
         _selectButton.onClick.AddListener(() =>
         {
-            if (_map.Access)
-                ShowMap();
+            if (_car.Access)
+                ShowCar();
             else
             {
-                if (player.Coins >= _map.Cost)
+                if (player.Coins >= _car.Cost)
                 {
                     uIController.PopupCall(() =>
                     {
-                        player.Coins -= _map.Cost;
-                        AccessMap = true;
+                        player.Coins -= _car.Cost;
+                        AccessCar = true;
                     });
-                    MapLoader.Instance.SaveAvailableContents(_map.Name);
+                    CarsLoader.Instance.SaveAvailableContents(_car.Name);
                 }
                 else
                 {
                     _mapWarning.StartAnimation();
                 }
             }
-            
+
         });
     }
 
-    public void SetMapUI(Map map)
+    public void SetMapUI(Car car)
     {
-        _map = map;
-        _name.text = map.Name;
-        _cost.text = map.Cost.ToString();
-        _mapPreview.sprite = map.Preview;
-        _accessPanel.SetActive(_map.Access);
+        _car = car;
+        _name.text = car.Name;
+        _cost.text = car.Cost.ToString();
+        _carPreview.sprite = car.Preview;
+        //_carPreview.SetNativeSize();
+        _accessPanel.SetActive(_car.Access);
     }
 
-    private void ShowMap()
+    private void ShowCar()
     {
-        MapLoader.Instance.SetContent(_map);
+        CarsLoader.Instance.SetContent(_car);
         uIController.OpenScreen(uIController.GetScreen<MainMenuScreen>());
     }
-
 
 }

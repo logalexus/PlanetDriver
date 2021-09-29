@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55dcfbd2af9ee3240b40f21a7553af74, type: 3}
+  m_Name: Cars
+  m_EditorClassIdentifier: 
+  _contents:
+  - Name: Poleaxe
+    Cost: 0
+    Preview: {fileID: 21300000, guid: 05801d0b32905694d89127c2068d383f, type: 3}
+    Prefab: {fileID: 344466826369120179, guid: 327e96885dd45eb44be9dae396103b60, type: 3}
+  - Name: Roland
+    Cost: 50
+    Preview: {fileID: 21300000, guid: 7506ae5b527749c42ab031081311e1b7, type: 3}
+    Prefab: {fileID: 4212454306779949499, guid: e93e55978d0e79443afd4c57249f7ac4, type: 3}
