@@ -15,6 +15,7 @@ public class DataController : MonoBehaviour
             Instance = this;
         else if (Instance == this)
             Destroy(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         _storage = new Storage();
         Load();
