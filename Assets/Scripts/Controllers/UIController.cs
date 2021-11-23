@@ -19,25 +19,21 @@ public class UIController : MonoBehaviour
             Instance = this;
         else if (Instance == this)
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    IEnumerator Start()
     {
+        yield return null;
+
         GameController.Instance.GameOver += () =>
         {
             OpenScreen(GetScreen<LoseScreen>());
         };
-        StartCoroutine(InitUI());
-    }
 
-    private IEnumerator InitUI()
-    {
-        yield return null;
         _activeScreen = GetScreen<MainMenuScreen>();
         _activeScreen.Open();
     }
-
+    
     public void OpenScreen(UIScreen screen)
     {
         _activeScreen.Close();

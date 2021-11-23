@@ -9,13 +9,10 @@ public class LoseScreen : UIScreen
 {
     [SerializeField] private LoseTransition _loseTransition;
     [SerializeField] private CinemachineSwitcher _cinemachineSwitcher;
-    [SerializeField] private RewAd _rewAd;
-    [SerializeField] private GameObject _X2Element;
     [Header("Buttons")]
     [SerializeField] private Button _collect;
     [SerializeField] private Button _again;
     [SerializeField] private Button _continue;
-    [SerializeField] private Button _rewardX2;
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _coinCounter;
     [SerializeField] private TextMeshProUGUI _distanceCounter;
@@ -46,17 +43,6 @@ public class LoseScreen : UIScreen
             uiController.OpenScreen(uiController.GetScreen<MainMenuScreen>());
             gameController.OnGameToInitial();
         });
-
-        _rewardX2.onClick.AddListener(() =>
-        {
-            _rewAd.ShowAd();
-            _X2Element.SetActive(false);
-        });
-
-        _player.CollectedCoinsInGameChanged += () =>
-        {
-            _coinCounter.text = $"{_player.CollectedCoinsInGame}$";
-        };
     }
     
     public override void Close()
@@ -67,7 +53,6 @@ public class LoseScreen : UIScreen
     public override void Open()
     {
         base.Open();
-        _X2Element.SetActive(true);
         _coinCounter.text = $"{_player.CollectedCoinsInGame}$";
         _distanceCounter.text = $"{_player.Distance}m";
         _loseTransition.OpenAnim().OnComplete(() => { _cinemachineSwitcher.SwitchAroundCamera(); });

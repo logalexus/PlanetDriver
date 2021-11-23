@@ -28,4 +28,6 @@ public class UIScreen : MonoBehaviour
         _canvasGroup.blocksRaycasts = value;
 
     }
+
+    
 }
