@@ -7,7 +7,7 @@ public class UIMap : MonoBehaviour
 {
     [SerializeField] private GameObject _accessPanel;
     [SerializeField] private Image _mapPreview;
-    [SerializeField] private WarningAnimation _mapWarning;
+    [SerializeField] private WarningAnimation _warning;
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _cost;
@@ -49,7 +49,8 @@ public class UIMap : MonoBehaviour
                 }
                 else
                 {
-                    _mapWarning.StartAnimation();
+                    _selectButton.interactable = false;
+                    _warning.StartAnimation(()=> { _selectButton.interactable = true; });
                 }
             }
             
