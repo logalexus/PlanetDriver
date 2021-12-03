@@ -12,11 +12,8 @@ public class AdController : MonoBehaviour
         GameController.Instance.GameOver += () =>
         {
             _loseCounter++;
-            if (_loseCounter == 2)
-            {
+            if (_loseCounter % 2 == 0)
                 _interAd.ShowAd();
-                _loseCounter = 0;
-            }
         };
     }
 }
