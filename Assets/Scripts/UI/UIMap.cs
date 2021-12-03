@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIMap : MonoBehaviour
 {
     [SerializeField] private GameObject _accessPanel;
+    [SerializeField] private GameObject _lockLabel;
     [SerializeField] private Image _mapPreview;
     [SerializeField] private WarningAnimation _mapWarning;
     [Header("Fields")]
@@ -24,6 +25,7 @@ public class UIMap : MonoBehaviour
         {
             _map.Access = value;
             _accessPanel.SetActive(value);
+            _lockLabel.SetActive(!value);
         }
     }
 
@@ -63,6 +65,8 @@ public class UIMap : MonoBehaviour
         _cost.text = map.Cost.ToString();
         _mapPreview.sprite = map.Preview;
         _accessPanel.SetActive(_map.Access);
+        _lockLabel.SetActive(!_map.Access);
+
     }
 
     private void ShowMap()
