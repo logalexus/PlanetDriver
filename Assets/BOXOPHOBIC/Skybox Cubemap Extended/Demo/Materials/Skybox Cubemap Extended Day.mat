@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Skybox Cubemap Extended Day
   m_Shader: {fileID: 4800000, guid: 82881a2d011b0964696411c822cdd00b, type: 3}
-  m_ShaderKeywords: _ENABLEROTATION_ON
+  m_ShaderKeywords: 
   m_LightmapFlags: 0
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -75,6 +75,7 @@ Material:
         m_Texture: {fileID: 8900000, guid: 3ce67fee0f260ee47b4d820421fe6ff9, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Advancedd: 1
     - _BumpScale: 1
@@ -85,7 +86,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _EnableFog: 0
-    - _EnableRotation: 1
+    - _EnableRotation: 0
     - _Exposure: 1
     - _Float0: 0
     - _FogFill: 0
