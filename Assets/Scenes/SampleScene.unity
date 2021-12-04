@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.544
   m_CustomReflection: {fileID: 8900000, guid: beb1457d375110e468b8d8e1f29fccea, type: 3}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.2049782, g: 0.4589613, b: 0.758919, a: 0.544}
+  m_IndirectSpecularColor: {r: 0.20497021, g: 0.45894003, b: 0.75891834, a: 0.544}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -683,7 +683,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c460f9648c7ec408ea7c20c84cc0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _prefEnemy: {fileID: 180453259052057691, guid: 37d05effd25eabe4a9cac046ad489ca7, type: 3}
+  _prefsEnemy:
+  - {fileID: 180453259052057691, guid: 37d05effd25eabe4a9cac046ad489ca7, type: 3}
+  - {fileID: 180453259052057691, guid: 9a481ba18efd2f846bbe289a31e335bf, type: 3}
+  - {fileID: 180453259052057691, guid: bf6f8519f71744449a93db0e072d0086, type: 3}
+  - {fileID: 180453259052057691, guid: e4272e74bc6cce34688869844534c29f, type: 3}
   _player: {fileID: 72061301}
   _planet: {fileID: 542687118}
   _mask:
@@ -8624,7 +8628,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.6}
-  m_AnchoredPosition: {x: 0, y: -109.637085}
+  m_AnchoredPosition: {x: 0, y: -109.63733}
   m_SizeDelta: {x: 0, y: 143.8011}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935425342
@@ -20548,7 +20552,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _planet: {fileID: 542687118}
   _car: {fileID: 72061302}
-  _coinPrefab: {fileID: 7163993318117461093, guid: 629efd188faf7164681abc4f717690c3, type: 3}
+  _coinPrefab:
+  - {fileID: 7163993318117461093, guid: 629efd188faf7164681abc4f717690c3, type: 3}
   _mask:
     serializedVersion: 2
     m_Bits: 1

@@ -1,11 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private SphereCollider _planet;
     [SerializeField] private Transform _car;
-    [SerializeField] private Coin _coinPrefab;
+    [SerializeField] private List<Coin> _coinPrefab;
     [SerializeField] private LayerMask _mask;
     [Header("Config")]
     [SerializeField] private int _poolCount = 10;

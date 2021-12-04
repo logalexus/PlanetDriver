@@ -7,21 +7,29 @@ public class PoolObjects<T> where T : MonoBehaviour
 {
     public bool AutoExpand { get; set; }
 
-    private T _prefab;
+    private List<T> _prefabs;
     private Transform _parent;
     private List<T> _pool;
+    private System.Random _rnd;
+    private int[] _randomNumbers;
+    private int _lastFreeObject = 0;
 
-    public PoolObjects(T prefab, int count)
+    public PoolObjects(List<T> prefabs, int count)
     {
-        _prefab = prefab;
+        _prefabs = prefabs;
         _parent = null;
+        _rnd = new System.Random();
+        _randomNumbers = GetRandomNumbers(count);
         CreatePool(count);
+        
     }
 
-    public PoolObjects(T prefab, int count, Transform parent)
+    public PoolObjects(List<T> prefabs, int count, Transform parent)
     {
-        _prefab = prefab;
+        _prefabs = prefabs;
         _parent = parent;
+        _rnd = new System.Random();
+        _randomNumbers = GetRandomNumbers(count);
         CreatePool(count);
     }
 
@@ -29,13 +37,29 @@ public class PoolObjects<T> where T : MonoBehaviour
     {
         _pool = new List<T>();
         for (int i = 0; i < count; i++)
-            CreateObject();
+            CreateObject(i);
 
     }
 
-    private T CreateObject(bool isActiveByDefault = false)
+    public int[] GetRandomNumbers(int count)
     {
-        T createdObject = Object.Instantiate(_prefab, _parent);
+        var numbers = Enumerable.Range(0, count).ToArray();
+        var n = count;
+        while (n > 1)
+        {
+            n--;
+            var k = _rnd.Next(0, count);
+            int value = numbers[k];
+            numbers[k] = numbers[n];
+            numbers[n] = value;
+        }
+        numbers = numbers.Select(x => x % _prefabs.Count).ToArray();
+        return numbers;
+    }
+
+    private T CreateObject(int index, bool isActiveByDefault = false)
+    {
+        T createdObject = Object.Instantiate(_prefabs[_randomNumbers[index]], _parent);
         createdObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createdObject);
         return createdObject;
@@ -43,13 +67,20 @@ public class PoolObjects<T> where T : MonoBehaviour
 
     public bool HasFreeElement(out T element)
     {
-        foreach (var poolObject in _pool)
-            if (!poolObject.gameObject.activeInHierarchy)
+        if (_lastFreeObject == _pool.Count - 1)
+            _lastFreeObject = 0;
+
+        for (int i = _lastFreeObject; i < _pool.Count; i++)
+        {
+            if (!_pool[i].gameObject.activeInHierarchy)
             {
-                element = poolObject;
-                poolObject.gameObject.SetActive(true);
+                element = _pool[i];
+                _pool[i].gameObject.SetActive(true);
+                _lastFreeObject = i;
                 return true;
             }
+        }
+            
 
         element = null;
         return false;
@@ -61,7 +92,7 @@ public class PoolObjects<T> where T : MonoBehaviour
             return element;
 
         if (AutoExpand)
-            return CreateObject(true);
+            return CreateObject(_rnd.Next(0, _randomNumbers.Length - 1), true);
 
         throw new System.Exception("No free elements");
     }

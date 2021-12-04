@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] private EnemyBehavior _prefEnemy;
+    [SerializeField] private List<EnemyBehavior> _prefsEnemy;
     [SerializeField] private GameObject _player;
     [SerializeField] private SphereCollider _planet;
     [SerializeField] private LayerMask _mask;
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
         GameController.Instance.GameOver += () => { _isPlaying = false; };
         GameController.Instance.GameRestart += RestartSpawner;
 
-        _pool = new PoolObjects<EnemyBehavior>(_prefEnemy, _poolCount, transform);
+        _pool = new PoolObjects<EnemyBehavior>(_prefsEnemy, _poolCount, transform);
         _pool.AutoExpand = _autoExpand;
         _diameterPlanet = _planet.radius * _planet.transform.localScale.x * 2;
         StartCoroutine(Spawn());
@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(1.5f);
             if (_isPlaying)
             {
                 Vector3 pos = _player.transform.position - _player.transform.up * (_diameterPlanet);
