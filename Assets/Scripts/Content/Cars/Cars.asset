@@ -18,6 +18,22 @@ MonoBehaviour:
     Preview: {fileID: 21300000, guid: 05801d0b32905694d89127c2068d383f, type: 3}
     Prefab: {fileID: 344466826369120179, guid: 327e96885dd45eb44be9dae396103b60, type: 3}
   - Name: Roland
-    Cost: 50
+    Cost: 1000
     Preview: {fileID: 21300000, guid: 7506ae5b527749c42ab031081311e1b7, type: 3}
     Prefab: {fileID: 4212454306779949499, guid: e93e55978d0e79443afd4c57249f7ac4, type: 3}
+  - Name: Rottam
+    Cost: 1750
+    Preview: {fileID: 21300000, guid: dbbc422aa4c47014482b343b6220cbf4, type: 3}
+    Prefab: {fileID: 6923874578824911829, guid: 32247942dabb72e4f9b37c1473a7e24b, type: 3}
+  - Name: Lesan
+    Cost: 2000
+    Preview: {fileID: 21300000, guid: 5b40ec5ab859575458acfba7280099b7, type: 3}
+    Prefab: {fileID: 526351921818443668, guid: 61febfe19befb3545b5fc2580a094c41, type: 3}
+  - Name: Audo
+    Cost: 2500
+    Preview: {fileID: 21300000, guid: 2245f81b9c13d6348b10de4f8ea8b432, type: 3}
+    Prefab: {fileID: 8614863396092406636, guid: c5a45a0973d3b424997c891b19a6a7cb, type: 3}
+  - Name: Ruster
+    Cost: 3000
+    Preview: {fileID: 21300000, guid: 826a61fcf53aaf845acb2dbbb8f51880, type: 3}
+    Prefab: {fileID: 7094038860531071619, guid: 9a7c3903881822f47ab285a9f79b09bd, type: 3}

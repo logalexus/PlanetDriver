@@ -1,36 +1,31 @@
 using System;
 using UnityEngine;
-using UnityEngine.Purchasing; //библиотека с покупками, будет доступна когда активируем сервисы
+using UnityEngine.Purchasing; 
 
-public class IAPCore : MonoBehaviour, IStoreListener //для получения сообщений из Unity Purchasing
+public class IAPCore : MonoBehaviour, IStoreListener 
 {
-    private static IStoreController m_StoreController;          //доступ к системе Unity Purchasing
-    private static IExtensionProvider m_StoreExtensionProvider; // подсистемы закупок для конкретных магазинов
+    private static IStoreController _StoreController;          
+    private static IExtensionProvider _StoreExtensionProvider; 
 
-    public static string kit10k = "com.zephyrusteam.planetdriver.kit10k"; //одноразовые - nonconsumable
-    public static string kit4k = "com.zephyrusteam.planetdriver.kit4k"; //одноразовые - nonconsumable или может быть подписка
-    public static string kit1k = "com.zephyrusteam.planetdriver.kit1k"; //многоразовые - consumable
+    public static string kit10k = "com.zephyrusteam.planetdriver.kit10k"; 
+    public static string kit4k = "com.zephyrusteam.planetdriver.kit4k"; 
+    public static string kit1k = "com.zephyrusteam.planetdriver.kit1k"; 
 
     void Start()
     {
-        if (m_StoreController == null) //если еще не инициализаровали систему Unity Purchasing, тогда инициализируем
-        {
+        if (_StoreController == null) 
             InitializePurchasing();
-        }
     }
 
     public void InitializePurchasing()
     {
-        if (IsInitialized()) //если уже подключены к системе - выходим из функции
-        {
+        if (IsInitialized())
             return;
-        }
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-
-        //Прописываем свои товары для добавления в билдер
+        
         builder.AddProduct(kit10k, ProductType.NonConsumable);
-        builder.AddProduct(kit4k, ProductType.NonConsumable); //или ProductType.Subscription
+        builder.AddProduct(kit4k, ProductType.NonConsumable);
         builder.AddProduct(kit1k, ProductType.Consumable);
 
         UnityPurchasing.Initialize(this, builder);
@@ -53,14 +48,14 @@ public class IAPCore : MonoBehaviour, IStoreListener //для получения сообщений и
 
     void BuyProductID(string productId)
     {
-        if (IsInitialized()) //если покупка инициализирована 
+        if (IsInitialized()) 
         {
-            Product product = m_StoreController.products.WithID(productId); //находим продукт покупки 
+            Product product = _StoreController.products.WithID(productId);  
 
-            if (product != null && product.availableToPurchase) //если продукт найдет и готов для продажи
+            if (product != null && product.availableToPurchase) 
             {
                 Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
-                m_StoreController.InitiatePurchase(product); //покупаем
+                _StoreController.InitiatePurchase(product); 
             }
             else
             {
@@ -73,9 +68,9 @@ public class IAPCore : MonoBehaviour, IStoreListener //для получения сообщений и
         }
     }
 
-    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) //контроль покупок
+    public PurchaseProcessingResult ProcessPurchase(PurchaseEventArgs args) 
     {
-        if (String.Equals(args.purchasedProduct.definition.id, kit10k, StringComparison.Ordinal)) //тут заменяем наш ID
+        if (String.Equals(args.purchasedProduct.definition.id, kit10k, StringComparison.Ordinal)) 
         {
             Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
 
@@ -102,7 +97,7 @@ public class IAPCore : MonoBehaviour, IStoreListener //для получения сообщений и
         return PurchaseProcessingResult.Complete;
     }
 
-    public void RestorePurchases() //Восстановление покупок (только для Apple). У гугл это автоматический процесс.
+    public void RestorePurchases() 
     {
         if (!IsInitialized())
         {
@@ -111,11 +106,11 @@ public class IAPCore : MonoBehaviour, IStoreListener //для получения сообщений и
         }
 
         if (Application.platform == RuntimePlatform.IPhonePlayer ||
-            Application.platform == RuntimePlatform.OSXPlayer) //если запущенно на эпл устройстве
+            Application.platform == RuntimePlatform.OSXPlayer) 
         {
             Debug.Log("RestorePurchases started ...");
 
-            var apple = m_StoreExtensionProvider.GetExtension<IAppleExtensions>();
+            var apple = _StoreExtensionProvider.GetExtension<IAppleExtensions>();
 
             apple.RestoreTransactions((result) =>
             {
@@ -132,13 +127,13 @@ public class IAPCore : MonoBehaviour, IStoreListener //для получения сообщений и
     public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
     {
         Debug.Log("OnInitialized: PASS");
-        m_StoreController = controller;
-        m_StoreExtensionProvider = extensions;
+        _StoreController = controller;
+        _StoreExtensionProvider = extensions;
     }
 
     private bool IsInitialized()
     {
-        return m_StoreController != null && m_StoreExtensionProvider != null;
+        return _StoreController != null && _StoreExtensionProvider != null;
     }
 
     public void OnInitializeFailed(InitializationFailureReason error)

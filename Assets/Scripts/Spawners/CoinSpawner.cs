@@ -10,6 +10,7 @@ public class CoinSpawner : MonoBehaviour
     [SerializeField] private LayerMask _mask;
     [Header("Config")]
     [SerializeField] private int _poolCount = 10;
+    [SerializeField] private float _frequence = 0.5f;
     [SerializeField] private bool _autoExpand = true;
 
 
@@ -40,7 +41,7 @@ public class CoinSpawner : MonoBehaviour
     {
         while(true)
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(_frequence);
 
             if (_isPlaying)
             {

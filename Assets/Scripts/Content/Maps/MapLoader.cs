@@ -9,7 +9,10 @@ public class MapLoader : ContentLoader<Map>
     public static MapLoader Instance;
     
     [SerializeField] private Transform _planetContainer;
-    
+    [SerializeField] private MapsHolder _mapsHolder;
+
+    public Map CurrentMap { get; private set; }
+
     public UnityAction<string> PlanetChanged;
     
     private void Awake()
@@ -28,6 +31,17 @@ public class MapLoader : ContentLoader<Map>
             SetContent(_contentHolder.GetContent(_dataController.Data.SavedMap));
         else
             SetContent(_contentHolder.Contents[0]);
+        //if (_dataController.Data.DistancesCounter == null)
+        //{
+        //    _dataController.Data.DistancesCounter = new Dictionary<string, int>();
+        //    foreach (var map in _mapsHolder.Contents)
+        //        _dataController.Data.DistancesCounter.Add(map.Name, 0);
+        //}
+        //else
+        //{
+        //    foreach (var map in _mapsHolder.Contents)
+        //        map.CurrentDistance = _dataController.Data.DistancesCounter[map.Name];
+        //}
     }
 
     protected override void SetAvailableContents()
@@ -37,17 +51,17 @@ public class MapLoader : ContentLoader<Map>
     
     public override void SetContent(Content content)
     {
-        Map map = content as Map;
-        _dataController.Data.SavedMap = map.Name;
+        CurrentMap = content as Map;
+        _dataController.Data.SavedMap = CurrentMap.Name;
         _dataController.Save();
 
         if (_planetContainer.childCount != 0)
             Destroy(_planetContainer.GetChild(0).gameObject);
 
-        Instantiate(map.Prefab, _planetContainer);
-        RenderSettings.skybox = map.SkyBox;
+        Instantiate(CurrentMap.Prefab, _planetContainer);
+        RenderSettings.skybox = CurrentMap.SkyBox;
 
-        PlanetChanged?.Invoke(map.Name);
+        PlanetChanged?.Invoke(CurrentMap.Name);
     }
     
 }

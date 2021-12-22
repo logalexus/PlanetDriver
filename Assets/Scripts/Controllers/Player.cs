@@ -7,7 +7,9 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Transform MainPosition;
+    [SerializeField] private Transform _mainPosition;
+    [SerializeField] private BoxCollider _collider;
+
 
     public Vector3 ContactPosition { get; private set; }
     public int CollectedCoinsInGame
@@ -94,13 +96,21 @@ public class Player : MonoBehaviour
     private void Start()
     {
         GameController.Instance.GameRestart += RestartPlayer;
+        CarsLoader.Instance.CarChanged += ChangeCollider;
         _oldPos = transform.position;
         _dataController = DataController.Instance;
         _audioController = AudioController.Instance;
         StartCoroutine(CountMetres());
         StartCoroutine(InitStatsUI());
     }
-    
+
+    private void ChangeCollider(string carName)
+    {
+        var newCollider = transform.GetChild(0).GetComponent<BoxCollider>();
+        _collider.size = newCollider.size;
+        _collider.center = newCollider.center;
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Crush") && !_isCollisionAlready)
@@ -115,8 +125,8 @@ public class Player : MonoBehaviour
     
     private void RestartPlayer()
     {
-        transform.position = MainPosition.position;
-        transform.rotation = MainPosition.rotation;
+        transform.position = _mainPosition.position;
+        transform.rotation = _mainPosition.rotation;
         _isCollisionAlready = false;
         CollectedCoinsInGame = 0;
         Distance = 0;
@@ -144,7 +154,7 @@ public class Player : MonoBehaviour
 
     public void CoinCollecting()
     {
-        CollectedCoinsInGame++;
+        CollectedCoinsInGame += 10;
         _audioController.PlaySFX(_audioController.Sounds.Coin);
     }
 

@@ -21,8 +21,9 @@ public class CoinÂehavior : MonoBehaviour
             Player.Instance.CoinCollecting();
             _coinAnim.DoCollect().OnComplete(() => 
             {
-                
-                _coinAnim.DoDefault().OnComplete(()=> parent.SetActive(false));
+                _coinAnim.DoDefault();
+                parent.SetActive(false);
+                //_coinAnim.DoDefault().OnComplete(()=> parent.SetActive(false));
             });
         }
     }

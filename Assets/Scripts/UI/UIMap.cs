@@ -7,10 +7,12 @@ public class UIMap : MonoBehaviour
 {
     [SerializeField] private GameObject _accessPanel;
     [SerializeField] private GameObject _lockLabel;
+    [SerializeField] private GameObject _costLabel;
     [SerializeField] private Image _mapPreview;
     [SerializeField] private WarningAnimation _mapWarning;
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _name;
+    [SerializeField] private TextMeshProUGUI _targetLevel;
     [SerializeField] private TextMeshProUGUI _cost;
     [Header("Buttons")]
     [SerializeField] private Button _selectButton;
@@ -66,8 +68,22 @@ public class UIMap : MonoBehaviour
         _mapPreview.sprite = map.Preview;
         _accessPanel.SetActive(_map.Access);
         _lockLabel.SetActive(!_map.Access);
-
+        _costLabel.SetActive(false);
+        _targetLevel.text = $"{_map.TargetLevel} lvl";
+        Player.Instance.LevelChanged += CheckLevel;
+        CheckLevel();
     }
+
+    private void CheckLevel()
+    {
+        if (Player.Instance.Level >= _map.TargetLevel)
+        {
+            _costLabel.SetActive(true);
+            _targetLevel.gameObject.SetActive(false);
+        }
+    }
+
+
 
     private void ShowMap()
     {

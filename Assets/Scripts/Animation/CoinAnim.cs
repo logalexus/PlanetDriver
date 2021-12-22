@@ -17,13 +17,16 @@ public class CoinAnim : MonoBehaviour
         Sequence s = DOTween.Sequence();
         s.Join(transform.DOLocalMoveY(transform.localPosition.y - 5f, 0.2f));
         s.Join(transform.DOScale(0, 1f));
+        //s.OnComplete(()=> s.Rewind());
         return s;
     }
     public Sequence DoDefault()
     {
+        transform.localPosition = Vector3.zero;
+        transform.localScale = Vector3.one;
         Sequence s = DOTween.Sequence();
-        s.Join(transform.DOLocalMoveY(transform.localPosition.y + 5f, 0));
-        s.Join(transform.DOScale(1, 0));
+        //s.Join(transform.DOLocalMoveY(transform.localPosition.y + 5f, 0));
+        //s.Join(transform.DOScale(1, 0));
         return s;
     }
     

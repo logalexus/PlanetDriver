@@ -80,7 +80,7 @@ public class PoolObjects<T> where T : MonoBehaviour
                 return true;
             }
         }
-            
+        _lastFreeObject = 0;
 
         element = null;
         return false;
