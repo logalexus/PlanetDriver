@@ -414,7 +414,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -88.99951}
+  m_AnchoredPosition: {x: 0, y: -89}
   m_SizeDelta: {x: -0.11609, y: 177.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &61202621
@@ -624,8 +624,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.9720707, y: 3.288948, z: 8.386214}
-  m_Center: {x: 0.0012464523, y: 1.7073097, z: 0.26556778}
+  m_Size: {x: 3.9720707, y: 3.288948, z: 1.4449797}
+  m_Center: {x: 0.0012464523, y: 1.7073097, z: -3.2050505}
 --- !u!114 &72061309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +638,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1e0b5dafaf2074409b04c984caf5953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainPosition: {fileID: 988784998}
+  _mainPosition: {fileID: 988784998}
+  _collider: {fileID: 72061306}
 --- !u!1 &76759182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1031,7 +1032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -88.99951}
+  m_AnchoredPosition: {x: 0, y: -89}
   m_SizeDelta: {x: -0.0019531, y: 177.6001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &110558146
@@ -1468,7 +1469,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -88.99951}
+  m_AnchoredPosition: {x: 0, y: -89}
   m_SizeDelta: {x: 0.10852, y: 177.6001}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &146249062
@@ -2042,7 +2043,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.4864865, y: 1}
+    m_SensorSize: {x: 0.5625, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -7627,7 +7628,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v1.1
+  m_text: v1.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
   m_sharedMaterial: {fileID: -7394139710670576184, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
@@ -7942,6 +7943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834343907}
+  - component: {fileID: 834343908}
   m_Layer: 5
   m_Name: X2Element
   m_TagString: Untagged
@@ -7968,9 +7970,21 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 400.43, y: 142}
+  m_AnchoredPosition: {x: 368, y: 144}
   m_SizeDelta: {x: 278.1333, y: 241.8041}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &834343908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 834343906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c923f82289045d64c841b499d1c85ce4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &839511928
 GameObject:
   m_ObjectHideFlags: 0
@@ -8386,8 +8400,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -62.2, y: 132.1}
-  m_SizeDelta: {x: 343.9076, y: 312.4131}
+  m_AnchoredPosition: {x: -11, y: 130}
+  m_SizeDelta: {x: 278.13, y: 241.81}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &876861824
 MonoBehaviour:
@@ -8770,7 +8784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.6}
-  m_AnchoredPosition: {x: 0, y: -109.63721}
+  m_AnchoredPosition: {x: 0, y: -109.637695}
   m_SizeDelta: {x: 0, y: 143.8011}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935425342
@@ -9291,6 +9305,7 @@ GameObject:
   - component: {fileID: 963194226}
   - component: {fileID: 963194229}
   - component: {fileID: 963194230}
+  - component: {fileID: 963194231}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -9458,6 +9473,19 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &963194231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c1b801546c629614f89d6e4ced2f7745, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 963194227}
 --- !u!1 &976045379
 GameObject:
   m_ObjectHideFlags: 0
@@ -13026,6 +13054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _contentHolder: {fileID: 11400000, guid: aeb9a7c5ba88d5640bc3d17cea194c9f, type: 2}
   _planetContainer: {fileID: 542687121}
+  _mapsHolder: {fileID: 11400000, guid: aeb9a7c5ba88d5640bc3d17cea194c9f, type: 2}
 --- !u!1 &1270512153
 GameObject:
   m_ObjectHideFlags: 0
@@ -13331,7 +13360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -88.99951}
+  m_AnchoredPosition: {x: 0, y: -89}
   m_SizeDelta: {x: -0.11609, y: 177.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1302448587
@@ -13617,7 +13646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -88.99951}
+  m_AnchoredPosition: {x: 0, y: -89}
   m_SizeDelta: {x: -0.11609, y: 177.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1338341883
@@ -18868,7 +18897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -53.754, y: 120.9}
+  m_AnchoredPosition: {x: 0.00027084, y: 120.9}
   m_SizeDelta: {x: 107.5082, y: 112.2645}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1992606524
@@ -20749,6 +20778,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   _poolCount: 15
+  _frequence: 0.5
   _autoExpand: 1
 --- !u!4 &77560441897096122
 Transform:

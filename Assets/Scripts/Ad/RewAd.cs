@@ -5,7 +5,10 @@ using GoogleMobileAds.Api;
 public class RewAd : MonoBehaviour
 {
     private RewardedAd _rewardedAd;
-    private string _rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
+    //private string _rewardedUnitId = "ca-app-pub-3940256099942544/5224354917";
+    private string _rewardedUnitId = "ca-app-pub-2866108726683711/6754006882";
+
+    
 
     private void OnEnable()
     {

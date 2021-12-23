@@ -53,7 +53,8 @@ public class UIMap : MonoBehaviour
                 }
                 else
                 {
-                    _mapWarning.StartAnimation();
+                    _selectButton.interactable = false;
+                    _mapWarning.StartAnimation(()=> _selectButton.interactable = true);
                 }
             }
             
