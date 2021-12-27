@@ -12,10 +12,14 @@ public class RewAd : MonoBehaviour
 
     private void OnEnable()
     {
+        GetRequest();
+    }
+    private void GetRequest()
+    {
         _rewardedAd = new RewardedAd(_rewardedUnitId);
         AdRequest adRequest = new AdRequest.Builder().Build();
-        _rewardedAd.LoadAd(adRequest);
         _rewardedAd.OnUserEarnedReward += OnUserEarnedReward;
+        _rewardedAd.LoadAd(adRequest);
     }
 
     private void OnUserEarnedReward(object sender, Reward e)
@@ -26,6 +30,9 @@ public class RewAd : MonoBehaviour
     public void ShowAd()
     {
         if (_rewardedAd.IsLoaded())
+        {
             _rewardedAd.Show();
+            GetRequest();
+        }
     }
 }

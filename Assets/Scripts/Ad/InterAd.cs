@@ -11,6 +11,11 @@ public class InterAd : MonoBehaviour
 
     private void OnEnable()
     {
+        GetRequest();
+    }
+
+    private void GetRequest()
+    {
         _interstitialAd = new InterstitialAd(_interstitialUnitId);
         AdRequest adRequest = new AdRequest.Builder().Build();
         _interstitialAd.LoadAd(adRequest);
@@ -19,7 +24,10 @@ public class InterAd : MonoBehaviour
     public void ShowAd()
     {
         if (_interstitialAd.IsLoaded())
+        {
             _interstitialAd.Show();
+            GetRequest();
+        }
     }
 
 }
