@@ -104,9 +104,9 @@ public class Player : MonoBehaviour
         StartCoroutine(InitStatsUI());
     }
 
-    private void ChangeCollider(string carName)
+    private void ChangeCollider(BoxCollider newCollider)
     {
-        var newCollider = transform.GetChild(0).GetComponent<BoxCollider>();
+        //var newCollider = transform.GetChild(0).GetComponent<BoxCollider>();
         _collider.size = newCollider.size;
         _collider.center = newCollider.center;
     }

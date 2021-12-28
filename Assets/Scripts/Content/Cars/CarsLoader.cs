@@ -9,7 +9,7 @@ public class CarsLoader : ContentLoader<Car>
 
     [SerializeField] private Transform _carContainer;
 
-    public UnityAction<string> CarChanged;
+    public UnityAction<BoxCollider> CarChanged;
 
     private void Awake()
     {
@@ -38,9 +38,9 @@ public class CarsLoader : ContentLoader<Car>
         if (_carContainer.childCount != 0)
             Destroy(_carContainer.GetChild(0).gameObject);
 
-        Instantiate(car.Prefab, _carContainer);
+        var auto = Instantiate(car.Prefab, _carContainer);
 
-        CarChanged?.Invoke(car.Name);
+        CarChanged?.Invoke(auto.GetComponent<BoxCollider>());
     }
 
     protected override void SetAvailableContents()

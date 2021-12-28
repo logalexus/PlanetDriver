@@ -13,19 +13,15 @@ public class IAPCore : MonoBehaviour, IStoreListener
 
     void Start()
     {
-        if (_StoreController == null) 
-            InitializePurchasing();
+        InitializePurchasing();
     }
 
     public void InitializePurchasing()
     {
-        if (IsInitialized())
-            return;
-
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
         
-        builder.AddProduct(kit10k, ProductType.NonConsumable);
-        builder.AddProduct(kit4k, ProductType.NonConsumable);
+        builder.AddProduct(kit10k, ProductType.Consumable);
+        builder.AddProduct(kit4k, ProductType.Consumable);
         builder.AddProduct(kit1k, ProductType.Consumable);
 
         UnityPurchasing.Initialize(this, builder);
@@ -48,23 +44,17 @@ public class IAPCore : MonoBehaviour, IStoreListener
 
     void BuyProductID(string productId)
     {
-        if (IsInitialized()) 
-        {
-            Product product = _StoreController.products.WithID(productId);  
 
-            if (product != null && product.availableToPurchase) 
-            {
-                Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
-                _StoreController.InitiatePurchase(product); 
-            }
-            else
-            {
-                Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
-            }
+        Product product = _StoreController.products.WithID(productId);
+
+        if (product != null && product.availableToPurchase)
+        {
+            Debug.Log(string.Format("Purchasing product asychronously: '{0}'", product.definition.id));
+            _StoreController.InitiatePurchase(product);
         }
         else
         {
-            Debug.Log("BuyProductID FAIL. Not initialized.");
+            Debug.Log("BuyProductID: FAIL. Not purchasing product, either is not found or is not available for purchase");
         }
     }
 
