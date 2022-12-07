@@ -13,7 +13,7 @@ public class ScreenTransition : MonoBehaviour
     protected float _durationOpen = 0.5f;
     protected float _durationClose = 0.4f;
     
-    private void Start()
+    private void Awake()
     {
         _canvas = GetComponent<RectTransform>();
         _canvasGroup = GetComponent<CanvasGroup>();

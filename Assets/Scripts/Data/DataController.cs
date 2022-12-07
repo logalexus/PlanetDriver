@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class DataController : MonoBehaviour
 {
     public static DataController Instance;

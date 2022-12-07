@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,19 +16,12 @@ public class UIController : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-            Instance = this;
-        else if (Instance == this)
-            Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
+        Instance = this;
     }
 
     private void Start()
     {
-        GameController.Instance.GameOver += () =>
-        {
-            OpenScreen(GetScreen<LoseScreen>());
-        };
+        GameController.Instance.GameOver += () => { OpenScreen(GetScreen<LoseScreen>()); };
         StartCoroutine(InitUI());
     }
 
@@ -49,7 +43,7 @@ public class UIController : MonoBehaviour
     {
         return _screens.OfType<T>().FirstOrDefault();
     }
-    
+
     public void PopupCall(UnityAction yesClick)
     {
         PopupScreen popup = GetScreen<PopupScreen>();
@@ -59,5 +53,4 @@ public class UIController : MonoBehaviour
         popup.NoClick += () => _activeScreen.SetInteractable(true);
         _activeScreen.SetInteractable(false);
     }
-    
 }
