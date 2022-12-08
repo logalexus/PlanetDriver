@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Example.MySql;
 
 
 public class DataController : MonoBehaviour
 {
+    [SerializeField] private DatabaseContext context;
+
     public static DataController Instance;
     public GameData Data { get; private set; }
 
@@ -14,10 +17,10 @@ public class DataController : MonoBehaviour
     {
         if (Instance == null)
             Instance = this;
-        else if (Instance == this)
-            Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
 
+        context.Connect();
+        
         _storage = new Storage();
         Load();
     }
@@ -30,7 +33,6 @@ public class DataController : MonoBehaviour
     public void Load()
     {
         Data = _storage.Load(new GameData()) as GameData;
-
     }
 
     private void OnApplicationQuit()

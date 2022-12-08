@@ -13,15 +13,16 @@ public class ScreenTransition : MonoBehaviour
     protected float _durationOpen = 0.5f;
     protected float _durationClose = 0.4f;
     
-    private void Awake()
+    public virtual void Init()
     {
-        _canvas = GetComponent<RectTransform>();
-        _canvasGroup = GetComponent<CanvasGroup>();
+        _canvas ??= GetComponent<RectTransform>();
+        _canvasGroup ??= GetComponent<CanvasGroup>();
         _canvasGroup.interactable = false;
     }
 
     public virtual Sequence CloseAnim()
     {
+        Init();
         _canvasGroup.interactable = false;
         Sequence s = DOTween.Sequence();
         s.Join(_bottomGroup.DOLocalMoveY(_bottomGroup.localPosition.y - _canvas.rect.height, _durationClose).SetEase(Ease.InBack, _overshot));
@@ -30,6 +31,7 @@ public class ScreenTransition : MonoBehaviour
     }
     public virtual Sequence OpenAnim()
     {
+        Init();
         OffsetPositionGroups();
         Sequence s = DOTween.Sequence();
         s.Join(_bottomGroup.DOLocalMoveY(_bottomGroup.localPosition.y + _canvas.rect.height, _durationOpen).SetEase(Ease.OutBack, _overshot));
