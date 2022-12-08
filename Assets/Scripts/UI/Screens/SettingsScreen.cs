@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Lean.Gui;
 using System.Collections;
+using Data;
 using UnityEngine;
 using UnityEngine.UI;
 

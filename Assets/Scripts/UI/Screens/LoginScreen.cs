@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -13,54 +14,30 @@ public class LoginScreen : UIScreen
 
     public void Init(LoginUIController uiController)
     {
-        loginButton.onClick.AddListener(OnLoginWithMail);
+        loginButton.onClick.AddListener(() => OnLoginWithMail());
         registerButton.onClick.AddListener(uiController.OpenRegisterScreen);
     }
-    
-    public void OnLoginWithMail()
+
+    public async UniTaskVoid OnLoginWithMail()
     {
         if (InputValid())
         {
             // get credentials
             string mail = mailInput.text;
             string password = passwordInput.text;
-            
-            
         }
         else
         {
-            
         }
     }
+
     private bool InputValid()
     {
         bool mailValid = !string.IsNullOrEmpty(mailInput.text);
         bool passwordValid = !string.IsNullOrEmpty(passwordInput.text);
         return mailValid && passwordValid;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     public override void Open()
     {
         base.Open();

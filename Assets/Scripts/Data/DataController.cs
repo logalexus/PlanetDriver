@@ -1,42 +1,46 @@
 ﻿using UnityEngine;
-using System.Collections;
-using Example.MySql;
 
-
-public class DataController : MonoBehaviour
+namespace Data
 {
-    [SerializeField] private DatabaseContext context;
-
-    public static DataController Instance;
-    public GameData Data { get; private set; }
-
-    private Storage _storage;
-    private Player _player;
-
-    private void Awake()
+    public class DataController : MonoBehaviour
     {
-        if (Instance == null)
+        [SerializeField] private DbConnection dbConnection;
+        [SerializeField] private UserRepository userRepository;
+
+
+        public static DataController Instance;
+    
+        public GameData Data { get; private set; }
+        public UserRepository UserRepository => userRepository;
+
+        private Storage _storage;
+        private Player _player;
+
+        private void Awake()
+        {
             Instance = this;
-        DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject);
 
-        context.Connect();
-        
-        _storage = new Storage();
-        Load();
-    }
+            dbConnection.Init();
+            userRepository.Init(dbConnection);
 
-    public void Save()
-    {
-        _storage.Save(Data);
-    }
+            _storage = new Storage();
+            Load();
+        }
 
-    public void Load()
-    {
-        Data = _storage.Load(new GameData()) as GameData;
-    }
+        public void Save()
+        {
+            _storage.Save(Data);
+        }
 
-    private void OnApplicationQuit()
-    {
-        Save();
+        public void Load()
+        {
+            Data = _storage.Load(new GameData()) as GameData;
+        }
+
+        private void OnApplicationQuit()
+        {
+            Save();
+        }
     }
 }

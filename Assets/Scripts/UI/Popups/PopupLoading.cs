@@ -1,7 +1,7 @@
 ﻿using DG.Tweening;
 using UnityEngine;
 
-namespace Example.MySql
+namespace UI.Popups
 {
     public class PopupLoading : UIScreen
     {

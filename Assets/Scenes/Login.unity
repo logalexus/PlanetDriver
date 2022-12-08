@@ -4182,7 +4182,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6ac4113c63e4cb0822962dbc98ea742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupLoading: {fileID: 5924875188710935601, guid: ef58dca069ab0b1449efabb4850acc29, type: 3}
+  popupLoadingPrefab: {fileID: 5924875188710935601, guid: ef58dca069ab0b1449efabb4850acc29, type: 3}
+  popupInfoPrefab: {fileID: 2312988667395814807, guid: bcb98a74d2416604d8e935701fea92a1, type: 3}
+  popupApprovePrefab: {fileID: 2820728834476897465, guid: 1c90b69bdec881f4bbd1f74c8f64da41, type: 3}
 --- !u!4 &1006984146
 Transform:
   m_ObjectHideFlags: 0
@@ -6566,7 +6568,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcedf0198cbd1cf48802070edaf11d01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  context:
+  dbConnection:
     Host: sql.freedb.tech
     User: freedb_logalex
     Password: Ur9Sd2h#5%ERFHB
