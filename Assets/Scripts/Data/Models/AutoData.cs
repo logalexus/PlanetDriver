@@ -2,7 +2,7 @@
 {
     public class AutoData
     {
-        public int Record;
-        public int IdPlanetType;
+        public string Name;
+        public int Cost;
     }
 }

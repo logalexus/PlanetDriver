@@ -6,12 +6,16 @@ namespace Data
     {
         [SerializeField] private DbConnection dbConnection;
         [SerializeField] private UserRepository userRepository;
+        [SerializeField] private PlanetRepository planetRepository;
+        [SerializeField] private AutoRepository autoRepository;
 
 
         public static DataController Instance;
     
         public GameData Data { get; private set; }
         public UserRepository UserRepository => userRepository;
+        public PlanetRepository PlanetRepository => planetRepository;
+        public AutoRepository AutoRepository => autoRepository;
 
         private Storage _storage;
         private Player _player;
@@ -23,6 +27,8 @@ namespace Data
 
             dbConnection.Init();
             userRepository.Init(dbConnection);
+            planetRepository.Init(dbConnection);
+            autoRepository.Init(dbConnection);
 
             _storage = new Storage();
             Load();

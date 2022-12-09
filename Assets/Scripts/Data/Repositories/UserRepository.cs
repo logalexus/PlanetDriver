@@ -14,9 +14,9 @@ namespace Data
             _dbConnection = dbConnection;
         }
 
-        public async UniTask<bool> AddUser(string email, string password)
+        public async UniTask<int> AddUser(string email, string password)
         {
-            bool result = false;
+            int id = -1;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
                 string sql = "insert into Users (Email, Password) values (@Email, @Password)";
@@ -27,11 +27,17 @@ namespace Data
                     
                     await connect.OpenAsync();
 
-                    result = await cmd.ExecuteNonQueryAsync() > 0;
+                    if (cmd.ExecuteNonQuery() >= 0)
+                    {
+                        sql = "SELECT LAST_INSERT_ID() AS ID";
+                        cmd.CommandText = sql;
+                        var idStr = await cmd.ExecuteScalarAsync();
+                        int.TryParse(idStr.ToString(), out id);
+                    }
                 }
             }
 
-            return result;
+            return id;
         }
         
         public async UniTask<bool> CheckExistEmail(string email)

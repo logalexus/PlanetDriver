@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 namespace Data
 {
     [Serializable]
-    public class PlanetRepository
+    public class AutoRepository
     {
         private DbConnection _dbConnection; 
         
@@ -16,16 +16,15 @@ namespace Data
             _dbConnection = dbConnection;
         }
 
-        public async UniTask<bool> AddPlanetToUser(int userId, int idPlanetType)
+        public async UniTask<bool> AddAutoToUser(int userId, int idAutoType)
         {
             bool result = false;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "insert into Planets (Record, idPlanetType, idUser) values (@Record, @idPlanetType, @idUser)";
+                string sql = "insert into Autos (idAutoType, idUser) values (@idAutoType, @idUser)";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
-                    cmd.Parameters.AddWithValue("Record", 0);
-                    cmd.Parameters.AddWithValue("idPlanetType", idPlanetType);
+                    cmd.Parameters.AddWithValue("idAutoType", idAutoType);
                     cmd.Parameters.AddWithValue("idUser", userId);
                     
                     await connect.OpenAsync();
@@ -37,14 +36,15 @@ namespace Data
             return result;
         }
         
-        public async UniTask<List<PlanetData>> GetAvailablePlanets(int userId)
+        public async UniTask<List<AutoData>> GetAvailableAutos(int userId)
         {
-            var planets = new List<PlanetData>();
+            var autos = new List<AutoData>();
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select PlanetType.Name, PlanetType.Cost, Planets.Record " +
-                             "from Planets, PlanetType " +
-                             "where idUser = @idUser and PlanetType.idPlanetType = Planets.idPlanetType)";
+                string sql = "select AutoType.Name, AutoType.Cost " +
+                             "from Autos, AutoType " +
+                             "where idUser = @idUser and Autos.idAutoType = AutoType.idAutoType)";
+                
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
                     await connect.OpenAsync();
@@ -53,17 +53,16 @@ namespace Data
                     {
                         while (reader.Read())
                         {
-                            planets.Add(new PlanetData()
+                            autos.Add(new AutoData()
                             {
                                 Name = reader.GetString(0),
                                 Cost = reader.GetInt32(1),
-                                Record = reader.GetInt32(2)
                             });
                         }
                     }
                 }
             }
-            return planets;
+            return autos;
         }
         
         public async UniTask<List<PlanetData>> GetAllPlanets()

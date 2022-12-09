@@ -20,6 +20,8 @@ public class RegisterScreen : UIScreen
     private PopupFactory _popupFactory;
     private DataController _dataController;
     private UserRepository _userRepository;
+    private PlanetRepository _planetRepository;
+    private AutoRepository _autoRepository;
     private LoginUIController _loginUIController;
 
     public void Init(LoginUIController uiController)
@@ -27,6 +29,8 @@ public class RegisterScreen : UIScreen
         _popupFactory = PopupFactory.Instance;
         _dataController = DataController.Instance;
         _userRepository = _dataController.UserRepository;
+        _planetRepository = _dataController.PlanetRepository;
+        _autoRepository = _dataController.AutoRepository;
         _loginUIController = uiController;
 
         registerButton.onClick.AddListener(() => OnRegister());
@@ -48,8 +52,13 @@ public class RegisterScreen : UIScreen
                     _popupFactory.ShowInfoPopup("Email already exists");
                     return;
                 }
+
+                int userId = await _userRepository.AddUser(email, password);
+
+                await _planetRepository.AddPlanetToUser(userId, 1);
+                await _autoRepository.AddAutoToUser(userId, 1);
                 
-                if (await _userRepository.AddUser(email, password))
+                if (userId != -1)
                 {
                     _popupFactory.ShowInfoPopup("Registeration success");
                     _loginUIController.OpenLoginScreen();
