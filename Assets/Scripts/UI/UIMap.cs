@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Data;
+using Data.Models;
 using TMPro;
+using UI.Popups;
 using UnityEngine.UI;
 
 public class UIMap : MonoBehaviour
@@ -10,87 +13,90 @@ public class UIMap : MonoBehaviour
     [SerializeField] private GameObject _costLabel;
     [SerializeField] private Image _mapPreview;
     [SerializeField] private WarningAnimation _mapWarning;
-    [Header("Fields")]
-    [SerializeField] private TextMeshProUGUI _name;
+    [Header("Fields")] [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _targetLevel;
     [SerializeField] private TextMeshProUGUI _cost;
-    [Header("Buttons")]
-    [SerializeField] private Button _selectButton;
-    
+    [Header("Buttons")] [SerializeField] private Button _selectButton;
+
+    private UIController _uiController;
+    private DataController _dataController;
+    private PopupFactory _popupFactory;
+    private Player _player;
+    private PlanetData _planetData;
     private Map _map;
-    private UIController uIController;
+    private bool _access;
 
     public bool AccessMap
     {
-        get => _map.Access;
+        get => _access;
         set
         {
-            _map.Access = value;
+            _access = value;
             _accessPanel.SetActive(value);
             _lockLabel.SetActive(!value);
         }
     }
 
-    private void Start()
+    public void Init(MapsHolder mapsHolder, PlanetData planetData)
     {
-        Player player = Player.Instance;
-        uIController = UIController.Instance;
+        _player = Player.Instance;
+        _uiController = UIController.Instance;
+        _dataController = DataController.Instance;
+        _popupFactory = PopupFactory.Instance;
+        _planetData = planetData;
 
-        _selectButton.onClick.AddListener(() =>
-        {
-            if (_map.Access)
-                ShowMap();
-            else
-            {
-                if (player.Coins >= _map.Cost)
-                {
-                    uIController.PopupCall(() =>
-                    {
-                        player.Coins -= _map.Cost;
-                        AccessMap = true;
-                    });
-                    MapLoader.Instance.SaveAvailableContents(_map.Name);
-                }
-                else
-                {
-                    _selectButton.interactable = false;
-                    _mapWarning.StartAnimation(()=> _selectButton.interactable = true);
-                }
-            }
-            
-        });
-    }
+        AccessMap = _dataController.Data.AvailablePlanetsData.Exists(x => x.Name == _planetData.Name);
 
-    public void SetMapUI(Map map)
-    {
+        Map map = mapsHolder.GetContent(_planetData.Name);
+
         _map = map;
-        _name.text = map.Name;
-        _cost.text = map.Cost.ToString();
         _mapPreview.sprite = map.Preview;
-        _accessPanel.SetActive(_map.Access);
-        _lockLabel.SetActive(!_map.Access);
-        _costLabel.SetActive(false);
-        _targetLevel.text = $"{_map.TargetLevel} lvl";
+        _name.text = _planetData.Name;
+        _cost.text = _planetData.Cost.ToString();
+        _targetLevel.text = $"{_planetData.TargetLevel} lvl";
         Player.Instance.LevelChanged += CheckLevel;
         CheckLevel();
+
+        _selectButton.onClick.AddListener(OnClickMap);
     }
 
-    private void CheckLevel()
+    private void OnClickMap()
     {
-        if (Player.Instance.Level >= _map.TargetLevel)
+        if (AccessMap)
         {
-            _costLabel.SetActive(true);
-            _targetLevel.gameObject.SetActive(false);
+            ShowMap();
+        }
+        else
+        {
+            if (_player.Coins >= _planetData.Cost)
+            {
+                _popupFactory.ShowApprovePopup("Are you sure?", "Warning", () =>
+                {
+                    _player.Coins -= _planetData.Cost;
+                    AccessMap = true;
+                });
+
+                //MapLoader.Instance.SaveAvailableContents(_planetData.Name);
+            }
+            else
+            {
+                _selectButton.interactable = false;
+                _mapWarning.StartAnimation(() => _selectButton.interactable = true);
+            }
         }
     }
 
 
+    private void CheckLevel()
+    {
+        bool value = Player.Instance.Level >= _planetData.TargetLevel;
+        _costLabel.SetActive(value);
+        _targetLevel.gameObject.SetActive(!value);
+    }
 
     private void ShowMap()
     {
         MapLoader.Instance.SetContent(_map);
-        uIController.OpenScreen(uIController.GetScreen<MainMenuScreen>());
+        _uiController.OpenScreen(_uiController.GetScreen<MainMenuScreen>());
     }
-
-
 }

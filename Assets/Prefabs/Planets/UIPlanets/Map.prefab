@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2114837856157416753}
   m_Layer: 5
-  m_Name: Coast
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,7 +568,7 @@ GameObject:
   - component: {fileID: 7939100266895121079}
   - component: {fileID: 7939100266895121076}
   m_Layer: 5
-  m_Name: Coast
+  m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

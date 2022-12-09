@@ -22,6 +22,9 @@ public class RegisterScreen : UIScreen
     private UserRepository _userRepository;
     private PlanetRepository _planetRepository;
     private AutoRepository _autoRepository;
+    private ProgressRepository _progressRepository;
+    private SettingsRepository _settingsRepository;
+    private AnalyticsRepository _analyticsRepository;
     private LoginUIController _loginUIController;
 
     public void Init(LoginUIController uiController)
@@ -31,6 +34,9 @@ public class RegisterScreen : UIScreen
         _userRepository = _dataController.UserRepository;
         _planetRepository = _dataController.PlanetRepository;
         _autoRepository = _dataController.AutoRepository;
+        _progressRepository = _dataController.ProgressRepository;
+        _settingsRepository = _dataController.SettingsRepository;
+        _analyticsRepository = _dataController.AnalyticsRepository;
         _loginUIController = uiController;
 
         registerButton.onClick.AddListener(() => OnRegister());
@@ -57,6 +63,8 @@ public class RegisterScreen : UIScreen
 
                 await _planetRepository.AddPlanetToUser(userId, 1);
                 await _autoRepository.AddAutoToUser(userId, 1);
+                await _progressRepository.AddProgress(userId, 1000, 1, 0);
+                await _settingsRepository.AddSettings(userId, true, true, false);
                 
                 if (userId != -1)
                 {
@@ -74,7 +82,6 @@ public class RegisterScreen : UIScreen
                 _popupFactory.ShowInfoPopup(e.Message);
                 throw;
             }
-            
         }
     }
 

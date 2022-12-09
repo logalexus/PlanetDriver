@@ -23,28 +23,28 @@ public class CarsLoader : ContentLoader<Car>
     {
         base.Start();
 
-        if (_dataController.Data.SavedCar != null)
-            SetContent(_contentHolder.GetContent(_dataController.Data.SavedCar));
-        else
-            SetContent(_contentHolder.Contents[0]);
+        // if (_dataController.Data.SavedCar != null)
+        //     SetContent(_contentHolder.GetContent(_dataController.Data.SavedCar));
+        // else
+        //     SetContent(_contentHolder.Contents[0]);
     }
 
     public override void SetContent(Content content)
     {
-        Car car = content as Car;
-        _dataController.Data.SavedCar = car.Name;
-        _dataController.Save();
-
-        if (_carContainer.childCount != 0)
-            Destroy(_carContainer.GetChild(0).gameObject);
-
-        var auto = Instantiate(car.Prefab, _carContainer);
-
-        CarChanged?.Invoke(auto.GetComponent<BoxCollider>());
+        // Car car = content as Car;
+        // _dataController.Data.SavedCar = car.Name;
+        // _dataController.Save();
+        //
+        // if (_carContainer.childCount != 0)
+        //     Destroy(_carContainer.GetChild(0).gameObject);
+        //
+        // var auto = Instantiate(car.Prefab, _carContainer);
+        //
+        // CarChanged?.Invoke(auto.GetComponent<BoxCollider>());
     }
 
     protected override void SetAvailableContents()
     {
-        _availableContents = _dataController.Data.AvailableCars;
+        //_availableContents = _dataController.Data.AvailableCars;
     }
 }

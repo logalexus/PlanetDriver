@@ -24,7 +24,7 @@ public class SettingsScreen : UIScreen
         set
         {
             _musicActive = value;
-            _dataController.Data.MusicActive = value;
+            _dataController.Data.SettingsData.MusicEnable = value;
             _dataController.Save();
             AudioController.Instance.SetMusicMute(!value);
         }
@@ -35,7 +35,7 @@ public class SettingsScreen : UIScreen
         set
         {
             _soundActive = value;
-            _dataController.Data.SoundActive = value;
+            _dataController.Data.SettingsData.SoundEnable = value;
             _dataController.Save();
             AudioController.Instance.SetSoundMute(!value);
         }
@@ -46,7 +46,7 @@ public class SettingsScreen : UIScreen
         set
         {
             _postProcActive = value;
-            _dataController.Data.PostProcActive = value;
+            _dataController.Data.SettingsData.GraphicQuality = value;
             _dataController.Save();
             _postProcessing.SetActive(value);
         }
@@ -74,9 +74,9 @@ public class SettingsScreen : UIScreen
     private IEnumerator InitSettings()
     {
         yield return null;
-        MusicActive = _dataController.Data.MusicActive;
-        SoundActive = _dataController.Data.SoundActive;
-        PostProcActive = _dataController.Data.PostProcActive;
+        MusicActive = _dataController.Data.SettingsData.MusicEnable;
+        SoundActive = _dataController.Data.SettingsData.SoundEnable;
+        PostProcActive = _dataController.Data.SettingsData.GraphicQuality;
         _musicSwitcher.On = MusicActive;
         _soundSwitcher.On = SoundActive;
         _postProcSwitcher.On = PostProcActive;

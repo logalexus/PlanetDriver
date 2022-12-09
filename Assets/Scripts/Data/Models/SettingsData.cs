@@ -4,6 +4,6 @@
     {
         public bool SoundEnable;
         public bool MusicEnable;
-        public bool GraphicQuaility;
+        public bool GraphicQuality;
     }
 }

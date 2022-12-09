@@ -28,8 +28,7 @@ public class Player : MonoBehaviour
         set
         {
             _coins = value;
-            _dataController.Data.Coins = value;
-            _dataController.Save();
+            _dataController.Data.ProgressData.Money = value;
             CoinsChanged?.Invoke();
         }
     }
@@ -39,8 +38,7 @@ public class Player : MonoBehaviour
         set
         {
             _level = value;
-            _dataController.Data.Level = value;
-            _dataController.Save();
+            _dataController.Data.ProgressData.Level = value;
             LevelChanged?.Invoke();
         }
     }
@@ -50,8 +48,7 @@ public class Player : MonoBehaviour
         set
         {
             _exp = value;
-            _dataController.Data.Exp = value;
-            _dataController.Save();
+            _dataController.Data.ProgressData.Exp = value;
             ExpChanged?.Invoke();
         }
     }
@@ -136,9 +133,9 @@ public class Player : MonoBehaviour
     private IEnumerator InitStatsUI()
     {
         yield return null;
-        Coins = _dataController.Data.Coins;
-        Level = _dataController.Data.Level;
-        Exp = _dataController.Data.Exp;
+        Coins = _dataController.Data.ProgressData.Money;
+        Level = _dataController.Data.ProgressData.Level;
+        Exp = _dataController.Data.ProgressData.Exp;
     }
 
     private IEnumerator CountMetres()

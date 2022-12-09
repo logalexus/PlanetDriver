@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Data.Models;
 using MySql.Data.MySqlClient;
 
 namespace Data
@@ -22,8 +23,8 @@ namespace Data
                 string sql = "insert into Users (Email, Password) values (@Email, @Password)";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
-                    cmd.Parameters.Add("Email", MySqlDbType.String).Value = email;
-                    cmd.Parameters.Add("Password", MySqlDbType.String).Value = password;
+                    cmd.Parameters.AddWithValue("Email", email);
+                    cmd.Parameters.AddWithValue("Password", password);
                     
                     await connect.OpenAsync();
 
@@ -36,7 +37,6 @@ namespace Data
                     }
                 }
             }
-
             return id;
         }
         
@@ -45,11 +45,13 @@ namespace Data
             bool result = false;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select exists(select Users.Email from Users where Email = @Email)";
+                string sql = "select exists(" +
+                                "select Users.Email " +
+                                "from Users " +
+                                "where Email = @Email)";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
-                    cmd.Parameters.Add("Email", MySqlDbType.String).Value = email;
-                    
+                    cmd.Parameters.AddWithValue("Email", email);
                     await connect.OpenAsync();
                     var value = await cmd.ExecuteScalarAsync();
                     result = (long)value == 1;
@@ -59,23 +61,34 @@ namespace Data
             return result;
         }
         
-        public async UniTask<bool> Auth(string email)
+        public async UniTask<UserData> GetUserByEmail(string email)
         {
-            bool result = false;
+            UserData user = null;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select exists(select Users.Email from Users where Email = @Email)";
+                string sql = "select Users.idUsers, Users.Email, Users.Password " +
+                             "from Users " +
+                             "where Email = @Email";
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
-                    cmd.Parameters.Add("Email", MySqlDbType.String).Value = email;
-                    
                     await connect.OpenAsync();
-                    var value = await cmd.ExecuteScalarAsync();
-                    result = (long)value == 1;
+                    cmd.Parameters.AddWithValue("Email", email);
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            user = new UserData()
+                            {
+                                Id = reader.GetInt32(0),
+                                Email = reader.GetString(1),
+                                Password = reader.GetString(2)
+                            };
+                        }
+                    }
                 }
             }
-
-            return result;
+            return user;
         }
+        
     }
 }

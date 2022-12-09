@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Data;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
@@ -12,34 +13,25 @@ public class PlanetsScreen : UIScreen
     [SerializeField] private MapsHolder _mapsHolder;
     [SerializeField] private UIMap _uiMap;
     [SerializeField] private VerticalScrollSnap _scroller;
-    [Header("Buttons")]
+    [Header("Buttons")] 
     [SerializeField] private Button _back;
-    [Header("Fields")]
+    [Header("Fields")] 
     [SerializeField] private TextMeshProUGUI _coinCounter;
     [SerializeField] private TextMeshProUGUI _levelCounter;
-    
 
-    private IEnumerator Start()
+    private DataController _dataController;
+
+    private void Start()
     {
         Player player = Player.Instance;
         UIController uiController = UIController.Instance;
+        _dataController = DataController.Instance;
+        
+        _back.onClick.AddListener(() => { uiController.OpenScreen(uiController.GetScreen<MainMenuScreen>()); });
 
-        _back.onClick.AddListener(() =>
-        {
-            uiController.OpenScreen(uiController.GetScreen<MainMenuScreen>());
-        });
+        player.CoinsChanged += () => { _coinCounter.text = $"{player.Coins}$"; };
+        player.LevelChanged += () => { _levelCounter.text = $"lvl {player.Level}"; };
 
-        player.CoinsChanged += () =>
-        {
-            _coinCounter.text = $"{player.Coins}$";
-        };
-
-        player.LevelChanged += () =>
-        {
-            _levelCounter.text = $"lvl {player.Level}";
-        };
-
-        yield return null;
         SetMapsUI();
     }
 
@@ -51,7 +43,7 @@ public class PlanetsScreen : UIScreen
 
     public override void Close()
     {
-        _planetsScreenTransition.CloseAnim().OnComplete(() => 
+        _planetsScreenTransition.CloseAnim().OnComplete(() =>
         {
             _scroller.GoToScreen(_mapsHolder.Contents.Count - 1);
             base.Close();
@@ -63,9 +55,10 @@ public class PlanetsScreen : UIScreen
         for (int i = _mapsHolder.Contents.Count - 1; i >= 0; i--)
         {
             UIMap mapUI = Instantiate(_uiMap);
-            mapUI.SetMapUI(_mapsHolder.Contents[i] as Map);
+            mapUI.Init(_mapsHolder, _dataController.Data.PlanetsData[i]);
             _scroller.AddChild(mapUI.gameObject);
         }
+
         _scroller.GoToScreen(_mapsHolder.Contents.Count - 1);
     }
 }

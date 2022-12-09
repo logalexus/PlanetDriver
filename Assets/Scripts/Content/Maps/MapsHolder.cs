@@ -15,7 +15,10 @@ public class MapsHolder : ContentHolder<Map>
         dbConnection.Init();
         using (MySqlConnection connect = new MySqlConnection(dbConnection.ConnectionString))
         {
-            string sql = "insert into PlanetType (idPlanetType, Name, Cost) values (@idPlanetType, @Name, @Cost) on duplicate key update idPlanetType=@idPlanetType, Name=@Name, Cost=@Cost";
+            string sql = "insert into PlanetType (idPlanetType, Name, Cost, TargetLevel) " +
+                         "values (@idPlanetType, @Name, @Cost, @TargetLevel) " +
+                         "on duplicate key update idPlanetType=@idPlanetType, Name=@Name, " +
+                         "Cost=@Cost, TargetLevel=@TargetLevel";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, connect))
             {
@@ -25,6 +28,7 @@ public class MapsHolder : ContentHolder<Map>
                     cmd.Parameters.AddWithValue("idPlanetType", map.Id);
                     cmd.Parameters.AddWithValue("Name", map.Name);
                     cmd.Parameters.AddWithValue("Cost", map.Cost);
+                    cmd.Parameters.AddWithValue("TargetLevel", map.TargetLevel);
                     
                     if (await cmd.ExecuteNonQueryAsync() > 0)
                         Debug.Log("Succes");

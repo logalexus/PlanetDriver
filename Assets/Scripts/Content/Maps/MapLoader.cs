@@ -27,41 +27,30 @@ public class MapLoader : ContentLoader<Map>
     {
         base.Start();
 
-        if (_dataController.Data.SavedMap != null)
-            SetContent(_contentHolder.GetContent(_dataController.Data.SavedMap));
-        else
-            SetContent(_contentHolder.Contents[0]);
-        //if (_dataController.Data.DistancesCounter == null)
-        //{
-        //    _dataController.Data.DistancesCounter = new Dictionary<string, int>();
-        //    foreach (var map in _mapsHolder.Contents)
-        //        _dataController.Data.DistancesCounter.Add(map.Name, 0);
-        //}
-        //else
-        //{
-        //    foreach (var map in _mapsHolder.Contents)
-        //        map.CurrentDistance = _dataController.Data.DistancesCounter[map.Name];
-        //}
+        // if (_dataController.Data.SavedMap != null)
+        //     SetContent(_contentHolder.GetContent(_dataController.Data.SavedMap));
+        // else
+        //     SetContent(_contentHolder.Contents[0]);
     }
 
     protected override void SetAvailableContents()
     {
-        _availableContents = _dataController.Data.AvailableMaps;
+        //_availableContents = _dataController.Data.AvailableMaps;
     }
     
     public override void SetContent(Content content)
     {
-        CurrentMap = content as Map;
-        _dataController.Data.SavedMap = CurrentMap.Name;
-        _dataController.Save();
-
-        if (_planetContainer.childCount != 0)
-            Destroy(_planetContainer.GetChild(0).gameObject);
-
-        Instantiate(CurrentMap.Prefab, _planetContainer);
-        RenderSettings.skybox = CurrentMap.SkyBox;
-
-        PlanetChanged?.Invoke(CurrentMap.Name);
+        // CurrentMap = content as Map;
+        // _dataController.Data.SavedMap = CurrentMap.Name;
+        // _dataController.Save();
+        //
+        // if (_planetContainer.childCount != 0)
+        //     Destroy(_planetContainer.GetChild(0).gameObject);
+        //
+        // Instantiate(CurrentMap.Prefab, _planetContainer);
+        // RenderSettings.skybox = CurrentMap.SkyBox;
+        //
+        // PlanetChanged?.Invoke(CurrentMap.Name);
     }
     
 }

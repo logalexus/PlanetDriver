@@ -21,7 +21,9 @@ namespace Data
             bool result = false;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "insert into Planets (Record, idPlanetType, idUser) values (@Record, @idPlanetType, @idUser)";
+                string sql = "insert into Planets (Record, idPlanetType, idUser) " +
+                             "values (@Record, @idPlanetType, @idUser)";
+                
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
                     cmd.Parameters.AddWithValue("Record", 0);
@@ -42,9 +44,11 @@ namespace Data
             var planets = new List<PlanetData>();
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select PlanetType.Name, PlanetType.Cost, Planets.Record " +
+                string sql = "select PlanetType.idPlanetType, PlanetType.Name, PlanetType.Cost, " +
+                             "PlanetType.TargetLevel, Planets.Record " +
                              "from Planets, PlanetType " +
-                             "where idUser = @idUser and PlanetType.idPlanetType = Planets.idPlanetType)";
+                             "where idUser = @idUser and PlanetType.idPlanetType = Planets.idPlanetType";
+                
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
                     await connect.OpenAsync();
@@ -55,9 +59,11 @@ namespace Data
                         {
                             planets.Add(new PlanetData()
                             {
-                                Name = reader.GetString(0),
-                                Cost = reader.GetInt32(1),
-                                Record = reader.GetInt32(2)
+                                IdPlanetType = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Cost = reader.GetInt32(2),
+                                TargetLevel = reader.GetInt32(3),
+                                Record = reader.GetInt32(4)
                             });
                         }
                     }
@@ -71,7 +77,9 @@ namespace Data
             var planets = new List<PlanetData>();
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select PlanetType.Name, PlanetType.Cost from PlanetType";
+                string sql = "select PlanetType.idPlanetType, PlanetType.Name, PlanetType.Cost, PlanetType.TargetLevel " +
+                             "from PlanetType";
+                
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
                     await connect.OpenAsync();
@@ -81,8 +89,10 @@ namespace Data
                         {
                             planets.Add(new PlanetData()
                             {
-                                Name = reader.GetString(0),
-                                Cost = reader.GetInt32(1)
+                                IdPlanetType = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Cost = reader.GetInt32(2),
+                                TargetLevel = reader.GetInt32(3),
                             });
                         }
                     }

@@ -2,6 +2,7 @@
 {
     public class AutoData
     {
+        public int IdAutoType;
         public string Name;
         public int Cost;
     }

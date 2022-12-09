@@ -41,9 +41,9 @@ namespace Data
             var autos = new List<AutoData>();
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select AutoType.Name, AutoType.Cost " +
+                string sql = "select AutoType.idAutoType, AutoType.Name, AutoType.Cost " +
                              "from Autos, AutoType " +
-                             "where idUser = @idUser and Autos.idAutoType = AutoType.idAutoType)";
+                             "where idUser = @idUser and Autos.idAutoType = AutoType.idAutoType";
                 
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
@@ -55,8 +55,9 @@ namespace Data
                         {
                             autos.Add(new AutoData()
                             {
-                                Name = reader.GetString(0),
-                                Cost = reader.GetInt32(1),
+                                IdAutoType = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Cost = reader.GetInt32(2)
                             });
                         }
                     }
@@ -65,12 +66,14 @@ namespace Data
             return autos;
         }
         
-        public async UniTask<List<PlanetData>> GetAllPlanets()
+        public async UniTask<List<AutoData>> GetAllAutos()
         {
-            var planets = new List<PlanetData>();
+            var planets = new List<AutoData>();
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "select PlanetType.Name, PlanetType.Cost from PlanetType";
+                string sql = "select AutoType.idAutoType, AutoType.Name, AutoType.Cost " +
+                             "from AutoType";
+                
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
                     await connect.OpenAsync();
@@ -78,10 +81,11 @@ namespace Data
                     {
                         while (reader.Read())
                         {
-                            planets.Add(new PlanetData()
+                            planets.Add(new AutoData()
                             {
-                                Name = reader.GetString(0),
-                                Cost = reader.GetInt32(1)
+                                IdAutoType = reader.GetInt32(0),
+                                Name = reader.GetString(1),
+                                Cost = reader.GetInt32(2)
                             });
                         }
                     }
