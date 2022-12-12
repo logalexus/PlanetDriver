@@ -1,6 +1,9 @@
-﻿using Cysharp.Threading.Tasks;
+﻿using System;
+using System.Collections;
+using Cysharp.Threading.Tasks;
 using Data.Models;
 using UnityEngine;
+using Analytics = AnalyticsLogic.Analytics;
 
 namespace Data
 {
@@ -26,6 +29,7 @@ namespace Data
         public SettingsRepository SettingsRepository => settingsRepository;
 
 
+        private Analytics _analytics;
         private Storage _storage;
         private Player _player;
 
@@ -41,6 +45,8 @@ namespace Data
                 Destroy(gameObject);
             }
 
+            _analytics = Analytics.Instance;
+
             dbConnection.Init();
             userRepository.Init(dbConnection);
             planetRepository.Init(dbConnection);
@@ -48,6 +54,8 @@ namespace Data
             analyticsRepository.Init(dbConnection);
             progressRepository.Init(dbConnection);
             settingsRepository.Init(dbConnection);
+
+            StartCoroutine(AnalyticsSender());
         }
 
         public async UniTask LoadData(UserData user)
@@ -82,8 +90,30 @@ namespace Data
             await progressRepository.Update(Data.UserData.Id, Data.ProgressData);
         }
 
-        private void OnApplicationQuit()
+        private async UniTask SaveAnalytics()
         {
+            try
+            {
+                foreach (var action in _analytics.GetActions())
+                    await analyticsRepository.AddAnalytics(Data.UserData.Id, action.Action, action.Time);
+            }
+            catch (Exception e)
+            {
+                Debug.Log(e.Message);
+                throw;
+            }
+            
+
+            _analytics.ClearQueue();
+        }
+
+        private IEnumerator AnalyticsSender()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(10f);
+                SaveAnalytics();
+            }
         }
     }
 }

@@ -40,6 +40,27 @@ public class MapsHolder : ContentHolder<Map>
             }
         }
     }
+
+    [Button]
+    public async void DeleteTypesDatabase()
+    {
+        dbConnection.Init();
+        using (MySqlConnection connect = new MySqlConnection(dbConnection.ConnectionString))
+        {
+            string sql = "delete from PlanetType";
+
+            using (MySqlCommand cmd = new MySqlCommand(sql, connect))
+            {
+                await connect.OpenAsync();
+
+                int rows = await cmd.ExecuteNonQueryAsync();
+                if (rows > 0)
+                    Debug.Log($"{rows} rows deleted - Success");
+                else
+                    Debug.Log("Failed");
+            }
+        }
+    }
 }
 
 [System.Serializable]

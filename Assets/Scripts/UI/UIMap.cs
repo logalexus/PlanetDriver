@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Linq;
+using AnalyticsLogic;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Models;
@@ -117,6 +118,7 @@ public class UIMap : MonoBehaviour
             await _dataController.PlanetRepository.AddPlanetToUser(_dataController.Data.UserData.Id,
                 _planetData.IdPlanetType, false);
             _dataController.Data.AvailablePlanetsData.Add(_planetData);
+            Analytics.Instance.Write($"Bought planet - {_planetData.Name}");
             PopupFactory.Instance.ClosePopup();
         }
         catch (MySqlException e)

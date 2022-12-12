@@ -145,6 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4868147813804641367}
   - component: {fileID: 4119188494134502069}
+  - component: {fileID: 4323578138286005814}
   m_Layer: 5
   m_Name: Leader
   m_TagString: Untagged
@@ -188,6 +189,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loginText: {fileID: 3879736942885990019}
   recordText: {fileID: 8545747270778817703}
+--- !u!114 &4323578138286005814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4868147813804641366}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: 900
+  m_PreferredHeight: 96.3152
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1
 --- !u!1 &7891493322646185395
 GameObject:
   m_ObjectHideFlags: 0

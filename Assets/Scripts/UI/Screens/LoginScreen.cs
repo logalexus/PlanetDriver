@@ -1,3 +1,4 @@
+using AnalyticsLogic;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Models;
@@ -54,13 +55,14 @@ public class LoginScreen : UIScreen
             _popupFactory.ShowLoadingPopup();
             try
             {
-                UserData user = await _userRepository.GetUserByEmail(login);
+                UserData user = await _userRepository.GetUserByLogin(login);
 
                 if (user != null && user.Password == password)
                 {
                     await _dataController.LoadData(user);
                     _popupFactory.ClosePopup();
                     SceneManager.LoadScene("Game");
+                    Analytics.Instance.Write("Logined");
                 }
                 else
                 {
@@ -85,7 +87,6 @@ public class LoginScreen : UIScreen
             _popupFactory.ShowInfoPopup("Not valid input");
             return false;
         }
-        
         return true;
     }
 

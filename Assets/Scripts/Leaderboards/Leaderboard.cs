@@ -21,7 +21,7 @@ namespace Leaderboards
                 leader.Init(i+1, leaders[i].Login, leaders[i].Record);
             }
             
-            for (int i = 5 - leaders.Count; i < 5; i++)
+            for (int i = leaders.Count; i < 5; i++)
             {
                 var leader = Instantiate(leaderPrefab, leaderContainer);
                 leader.Init(i+1, "---", 0);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using AnalyticsLogic;
 using Cysharp.Threading.Tasks;
 using Data;
 using UnityEngine;
@@ -51,6 +52,8 @@ public class LoseScreen : UIScreen
         {
             _rewAd.ShowAd();
             _X2Element.SetActive(false);
+            
+            Analytics.Instance.Write($"Used x2 coins");
         });
 
         _player.CollectedCoinsInGameChanged += () => { _coinCounter.text = $"{_player.CollectedCoinsInGame}$"; };
@@ -64,6 +67,10 @@ public class LoseScreen : UIScreen
     public override void Open()
     {
         base.Open();
+        
+        Analytics.Instance.Write($"Completed distance - {_player.Distance}m");
+        Analytics.Instance.Write($"Collected coins - {_player.CollectedCoinsInGame}");
+        
         _X2Element.SetActive(true);
         _coinCounter.text = $"{_player.CollectedCoinsInGame}$";
         _distanceCounter.text = $"{_player.Distance}m";

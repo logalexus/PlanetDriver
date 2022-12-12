@@ -53,7 +53,7 @@ public class RegisterScreen : UIScreen
             _popupFactory.ShowLoadingPopup();
             try
             {
-                if (await _userRepository.CheckExistEmail(login))
+                if (await _userRepository.CheckExistLogin(login))
                 {
                     _popupFactory.ShowInfoPopup("Login already exists");
                     return;
@@ -101,6 +101,18 @@ public class RegisterScreen : UIScreen
         if (!passwordMuch)
         {
             _popupFactory.ShowInfoPopup("Passwords do not match");
+            return false;
+        }
+
+        if (mailInput.text.Length < 5 || mailInput.text.Length > 20)
+        {
+            _popupFactory.ShowInfoPopup("Login length must be between 5 and 20 characters");
+            return false;
+        }
+
+        if (passwordInput.text.Length <= 5)
+        {
+            _popupFactory.ShowInfoPopup("Password length must be more than 5 characters");
             return false;
         }
 

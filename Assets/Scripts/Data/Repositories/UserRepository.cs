@@ -41,7 +41,7 @@ namespace Data
             return id;
         }
         
-        public async UniTask<bool> CheckExistEmail(string login)
+        public async UniTask<bool> CheckExistLogin(string login)
         {
             bool result = false;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
@@ -62,7 +62,7 @@ namespace Data
             return result;
         }
         
-        public async UniTask<UserData> GetUserByEmail(string login)
+        public async UniTask<UserData> GetUserByLogin(string login)
         {
             UserData user = null;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))

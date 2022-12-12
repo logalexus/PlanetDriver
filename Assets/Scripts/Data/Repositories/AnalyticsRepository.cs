@@ -14,16 +14,18 @@ namespace Data
             _dbConnection = dbConnection;
         }
 
-        public async UniTask<bool> AddAnalytics(int userId, int idPlanetType)
+        public async UniTask<bool> AddAnalytics(int userId, string action, string time)
         {
             bool result = false;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "insert into Planets (Record, idPlanetType, idUser) values (@Record, @idPlanetType, @idUser)";
+                string sql = "insert into Analytics (Action, Time, idUser) " +
+                             "values (@Action, @Time, @idUser)";
+                
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
-                    cmd.Parameters.AddWithValue("Record", 0);
-                    cmd.Parameters.AddWithValue("idPlanetType", idPlanetType);
+                    cmd.Parameters.AddWithValue("Action", action);
+                    cmd.Parameters.AddWithValue("Time", time);
                     cmd.Parameters.AddWithValue("idUser", userId);
                     
                     await connect.OpenAsync();
@@ -34,5 +36,7 @@ namespace Data
 
             return result;
         }
+        
+        
     }
 }

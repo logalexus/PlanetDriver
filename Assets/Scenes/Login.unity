@@ -827,7 +827,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224709814}
   m_Layer: 5
-  m_Name: Email
+  m_Name: Login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -852,7 +852,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -856.83}
+  m_AnchoredPosition: {x: 546.1014, y: -736.03}
   m_SizeDelta: {x: 426.1088, y: 85.337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &259957168
@@ -2055,7 +2055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -1121}
+  m_AnchoredPosition: {x: 546.1014, y: -1000.2}
   m_SizeDelta: {x: 426.1088, y: 85.337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &546723109
@@ -3220,7 +3220,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: example@mail.com
+  m_text: login
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
   m_sharedMaterial: {fileID: -7394139710670576184, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
@@ -3622,7 +3622,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000010014, y: -510}
+  m_AnchoredPosition: {x: 6.1014047, y: -389.2}
   m_SizeDelta: {x: 264.505, y: 57.4247}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &947984177
@@ -4492,7 +4492,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 548.9, y: -1383}
+  m_AnchoredPosition: {x: 548.9, y: -1242}
   m_SizeDelta: {x: 426.1088, y: 85.337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1249879246
@@ -4816,7 +4816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1289220440}
   m_Layer: 5
-  m_Name: Email
+  m_Name: Login
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4841,7 +4841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -856.83}
+  m_AnchoredPosition: {x: 540, y: -715.83}
   m_SizeDelta: {x: 426.1088, y: 85.337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1327233186
@@ -5576,7 +5576,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -1121}
+  m_AnchoredPosition: {x: 540, y: -980}
   m_SizeDelta: {x: 426.1088, y: 85.337}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1536775944
@@ -5658,7 +5658,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: example@mail.com
+  m_text: login
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
   m_sharedMaterial: {fileID: -7394139710670576184, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
@@ -5735,6 +5735,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1536775944}
   m_CullTransparentMesh: 1
+--- !u!1 &1550379727
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1550379729}
+  - component: {fileID: 1550379728}
+  m_Layer: 0
+  m_Name: Analytics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1550379728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550379727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb098911904a4758870ee5fdfc683161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1550379729
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1550379727}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1295.115, y: 972.1074, z: -9.681988}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1567083748
 GameObject:
   m_ObjectHideFlags: 0
@@ -5793,7 +5837,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E-mail
+  m_text: Login
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
   m_sharedMaterial: {fileID: -7394139710670576184, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
@@ -6177,7 +6221,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.1014, y: -387.8}
+  m_AnchoredPosition: {x: 4, y: -267}
   m_SizeDelta: {x: 421.906, y: 136.6863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610488150
@@ -6691,7 +6735,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685575451}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 963194227}
@@ -6998,7 +7042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000010014, y: -660}
+  m_AnchoredPosition: {x: 0.000010014, y: -519}
   m_SizeDelta: {x: 505.0818, y: 109.6545}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1919588467
@@ -7501,7 +7545,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: E-mail
+  m_text: Login
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}
   m_sharedMaterial: {fileID: -7394139710670576184, guid: 05df1ca3779c999498cb300abfc2ae07, type: 2}

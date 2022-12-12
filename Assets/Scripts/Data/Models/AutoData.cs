@@ -7,4 +7,10 @@
         public int Cost;
         public bool IsCurrent;
     }
+    
+    public class AnalyticData
+    {
+        public string Action;
+        public string Time;
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using AnalyticsLogic;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Models;
@@ -83,6 +84,7 @@ public class UICar : MonoBehaviour
             await _dataController.AutoRepository.AddAutoToUser(_dataController.Data.UserData.Id, _autoData.IdAutoType,
                 false);
             _dataController.Data.AvailableAutosData.Add(_autoData);
+            Analytics.Instance.Write($"Bought auto - {_autoData.Name}");
             PopupFactory.Instance.ClosePopup();
         }
         catch (MySqlException e)
