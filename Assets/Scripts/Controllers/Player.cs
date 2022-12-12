@@ -61,6 +61,16 @@ public class Player : MonoBehaviour
             DistanceChanged?.Invoke();
         }
     }
+    
+    public int CompletedDistance
+    {
+        get => _completedDistance;
+        set
+        {
+            _completedDistance = value;
+            CompletedDistanceChanged?.Invoke();
+        }
+    }
 
     public static Player Instance;
 
@@ -70,6 +80,7 @@ public class Player : MonoBehaviour
     public UnityAction LevelChanged;
     public UnityAction ExpChanged;
     public UnityAction DistanceChanged;
+    public UnityAction CompletedDistanceChanged;
     
     private bool _isCollisionAlready = false;
     private int _collectedCoinsInGame;
@@ -77,6 +88,7 @@ public class Player : MonoBehaviour
     private int _level;
     private int _exp;
     private int _distance;
+    private int _completedDistance;
     private int _maxExp = 1000;
     private Vector3 _oldPos;
     private DataController _dataController;
@@ -88,7 +100,6 @@ public class Player : MonoBehaviour
             Instance = this;
         else if (Instance == this)
             Destroy(gameObject);
-        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()

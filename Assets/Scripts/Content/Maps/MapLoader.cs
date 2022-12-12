@@ -1,19 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
+using Data;
+using Data.Models;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class MapLoader : ContentLoader<Map>
+public class MapLoader : MonoBehaviour
 {
     public static MapLoader Instance;
     
     [SerializeField] private Transform _planetContainer;
     [SerializeField] private MapsHolder _mapsHolder;
 
-    public Map CurrentMap { get; private set; }
+    public PlanetData CurrentPlanet { get; private set; }
 
     public UnityAction<string> PlanetChanged;
+    
+    private DataController _dataController;
+
     
     private void Awake()
     {
@@ -23,34 +28,31 @@ public class MapLoader : ContentLoader<Map>
             Destroy(gameObject);
     }
     
-    protected override void Start()
+    private void Start()
     {
-        base.Start();
-
-        // if (_dataController.Data.SavedMap != null)
-        //     SetContent(_contentHolder.GetContent(_dataController.Data.SavedMap));
-        // else
-        //     SetContent(_contentHolder.Contents[0]);
+        _dataController = DataController.Instance;
+        
+        PlanetData planetData = _dataController.Data.AvailablePlanetsData.Find(x => x.IsCurrent);
+        
+        SetContent(planetData);
     }
 
-    protected override void SetAvailableContents()
-    {
-        //_availableContents = _dataController.Data.AvailableMaps;
-    }
     
-    public override void SetContent(Content content)
+    public void SetContent(PlanetData planetData)
     {
-        // CurrentMap = content as Map;
-        // _dataController.Data.SavedMap = CurrentMap.Name;
-        // _dataController.Save();
-        //
-        // if (_planetContainer.childCount != 0)
-        //     Destroy(_planetContainer.GetChild(0).gameObject);
-        //
-        // Instantiate(CurrentMap.Prefab, _planetContainer);
-        // RenderSettings.skybox = CurrentMap.SkyBox;
-        //
-        // PlanetChanged?.Invoke(CurrentMap.Name);
+        Map planet = _mapsHolder.GetContent(planetData.Name);
+        
+        CurrentPlanet = planetData;
+        
+        _dataController.Data.AvailablePlanetsData.ForEach(x=>x.IsCurrent = false);
+        _dataController.Data.AvailablePlanetsData.Find(x=>x.Name == planetData.Name).IsCurrent = true;
+        
+        if (_planetContainer.childCount != 0)
+            Destroy(_planetContainer.GetChild(0).gameObject);
+        
+        Instantiate(planet.Prefab, _planetContainer);
+        RenderSettings.skybox = planet.SkyBox;
+        
+        PlanetChanged?.Invoke(planetData.Name);
     }
-    
 }

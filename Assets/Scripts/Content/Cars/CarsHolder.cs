@@ -13,7 +13,9 @@ public class CarsHolder : ContentHolder<Car>
         dbConnection.Init();
         using (MySqlConnection connect = new MySqlConnection(dbConnection.ConnectionString))
         {
-            string sql = "insert into AutoType (idAutoType, Name, Cost) values (@idAutoType, @Name, @Cost) on duplicate key update idAutoType=@idAutoType, Name=@Name, Cost=@Cost";
+            string sql = "insert into AutoType (idAutoType, Name, Cost) " +
+                         "values (@idAutoType, @Name, @Cost) " +
+                         "on duplicate key update idAutoType=@idAutoType, Name=@Name, Cost=@Cost";
 
             using (MySqlCommand cmd = new MySqlCommand(sql, connect))
             {

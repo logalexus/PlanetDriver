@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Data;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,33 +15,31 @@ public class CarsScreen : UIScreen
     [SerializeField] private UICar _uiCar;
     [SerializeField] private HorizontalScrollSnap _scroller;
 
-    [Header("Buttons")]
+    [Header("Buttons")] 
     [SerializeField] private Button _back;
-    [Header("Fields")]
+    [Header("Fields")] 
     [SerializeField] private TextMeshProUGUI _coinCounter;
     [SerializeField] private TextMeshProUGUI _levelCounter;
 
-    
+    private DataController _dataController;
+
+
     private IEnumerator Start()
     {
         Player player = Player.Instance;
+        _dataController = DataController.Instance;
 
         _back.onClick.AddListener(() =>
         {
             UIController.Instance.OpenScreen(UIController.Instance.GetScreen<MainMenuScreen>());
         });
 
-        player.CoinsChanged += () =>
-        {
-            _coinCounter.text = $"{player.Coins}$";
-        };
+        player.CoinsChanged += () => { _coinCounter.text = $"{player.Coins}$"; };
 
-        player.LevelChanged += () =>
-        {
-            _levelCounter.text = $"lvl {player.Level}";
-        };
+        player.LevelChanged += () => { _levelCounter.text = $"lvl {player.Level}"; };
 
         yield return null;
+        
         SetCarsUI();
     }
 
@@ -57,10 +56,10 @@ public class CarsScreen : UIScreen
 
     private void SetCarsUI()
     {
-        for (int i = 0; i < _carsHolder.Contents.Count; i++)
+        for (int i = 0; i < _dataController.Data.AutosData.Count; i++)
         {
             UICar carUI = Instantiate(_uiCar);
-            carUI.SetMapUI(_carsHolder.Contents[i] as Car);
+            carUI.Init(_carsHolder, _dataController.Data.AutosData[i]);
             _scroller.AddChild(carUI.gameObject);
         }
     }

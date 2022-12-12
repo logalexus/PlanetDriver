@@ -68,5 +68,29 @@ namespace Data
             }
             return progress;
         }
+        
+        public async UniTask Update(int userId, ProgressData progressData)
+        {
+            using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
+            {
+                string sql = "update Progress " +
+                             "set Money = @Money, Level = @Level, Exp = @Exp " +
+                             "where idUser = @idUser";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, connect))
+                {
+                    await connect.OpenAsync();
+                    
+                    cmd.Parameters.AddWithValue("Money", progressData.Money);
+                    cmd.Parameters.AddWithValue("Level", progressData.Level);
+                    cmd.Parameters.AddWithValue("Exp", progressData.Exp);
+                    cmd.Parameters.AddWithValue("idUser", userId);
+
+                    await cmd.ExecuteNonQueryAsync();
+
+                    cmd.Parameters.Clear();
+                }
+            }
+        }
     }
 }

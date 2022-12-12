@@ -16,20 +16,21 @@ namespace Data
             _dbConnection = dbConnection;
         }
 
-        public async UniTask<bool> AddPlanetToUser(int userId, int idPlanetType)
+        public async UniTask<bool> AddPlanetToUser(int userId, int idPlanetType, bool isCurrent)
         {
             bool result = false;
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
-                string sql = "insert into Planets (Record, idPlanetType, idUser) " +
-                             "values (@Record, @idPlanetType, @idUser)";
+                string sql = "insert into Planets (Record, idPlanetType, idUser, IsCurrent) " +
+                             "values (@Record, @idPlanetType, @idUser, @IsCurrent)";
                 
                 using (MySqlCommand cmd = new MySqlCommand(sql, connect))
                 {
                     cmd.Parameters.AddWithValue("Record", 0);
                     cmd.Parameters.AddWithValue("idPlanetType", idPlanetType);
                     cmd.Parameters.AddWithValue("idUser", userId);
-                    
+                    cmd.Parameters.AddWithValue("IsCurrent", Convert.ToInt32(isCurrent));
+
                     await connect.OpenAsync();
 
                     result = await cmd.ExecuteNonQueryAsync() > 0;
@@ -45,7 +46,7 @@ namespace Data
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
             {
                 string sql = "select PlanetType.idPlanetType, PlanetType.Name, PlanetType.Cost, " +
-                             "PlanetType.TargetLevel, Planets.Record " +
+                             "PlanetType.TargetLevel, Planets.Record, Planets.IsCurrent " +
                              "from Planets, PlanetType " +
                              "where idUser = @idUser and PlanetType.idPlanetType = Planets.idPlanetType";
                 
@@ -63,7 +64,8 @@ namespace Data
                                 Name = reader.GetString(1),
                                 Cost = reader.GetInt32(2),
                                 TargetLevel = reader.GetInt32(3),
-                                Record = reader.GetInt32(4)
+                                Record = reader.GetInt32(4),
+                                IsCurrent = Convert.ToBoolean(reader.GetInt32(5))
                             });
                         }
                     }
@@ -72,7 +74,7 @@ namespace Data
             return planets;
         }
         
-        public async UniTask<List<PlanetData>> GetAllPlanets()
+        public async UniTask<List<PlanetData>> GetAllPlanetTypes()
         {
             var planets = new List<PlanetData>();
             using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
@@ -101,5 +103,30 @@ namespace Data
             return planets;
         }
         
+        public async UniTask Update(int userId, List<PlanetData> planetsData)
+        {
+            using (MySqlConnection connect = new MySqlConnection(_dbConnection.ConnectionString))
+            {
+                string sql = "update Planets " +
+                             "set Record = @Record, IsCurrent = @IsCurrent " +
+                             "where idUser = @idUser and idPlanetType = @idPlanetType";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, connect))
+                {
+                    await connect.OpenAsync();
+                    foreach (var planet in planetsData)
+                    {
+                        cmd.Parameters.AddWithValue("Record", planet.Record);
+                        cmd.Parameters.AddWithValue("IsCurrent", Convert.ToBoolean(planet.IsCurrent));
+                        cmd.Parameters.AddWithValue("idUser", userId);
+                        cmd.Parameters.AddWithValue("idPlanetType", planet.IdPlanetType);
+
+                        await cmd.ExecuteNonQueryAsync();
+                    
+                        cmd.Parameters.Clear();
+                    }
+                }
+            }
+        }
     }
 }

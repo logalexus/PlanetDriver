@@ -5,5 +5,6 @@
         public int IdAutoType;
         public string Name;
         public int Cost;
+        public bool IsCurrent;
     }
 }

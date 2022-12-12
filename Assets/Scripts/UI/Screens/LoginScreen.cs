@@ -48,13 +48,13 @@ public class LoginScreen : UIScreen
     {
         if (InputValid())
         {
-            string email = mailInput.text;
+            string login = mailInput.text;
             string password = Utilities.GetHash(passwordInput.text);
 
             _popupFactory.ShowLoadingPopup();
             try
             {
-                UserData user = await _userRepository.GetUserByEmail(email);
+                UserData user = await _userRepository.GetUserByEmail(login);
 
                 if (user != null && user.Password == password)
                 {
@@ -73,17 +73,14 @@ public class LoginScreen : UIScreen
                 throw;
             }
         }
-        else
-        {
-        }
     }
 
     private bool InputValid()
     {
-        bool mailValid = !string.IsNullOrEmpty(mailInput.text);
+        bool loginValid = !string.IsNullOrEmpty(mailInput.text);
         bool passwordValid = !string.IsNullOrEmpty(passwordInput.text);
         
-        if (!mailValid || !passwordValid)
+        if (!loginValid || !passwordValid)
         {
             _popupFactory.ShowInfoPopup("Not valid input");
             return false;

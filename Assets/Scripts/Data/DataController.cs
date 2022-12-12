@@ -16,7 +16,7 @@ namespace Data
 
 
         public static DataController Instance;
-    
+
         public GameData Data { get; private set; }
         public UserRepository UserRepository => userRepository;
         public PlanetRepository PlanetRepository => planetRepository;
@@ -25,14 +25,21 @@ namespace Data
         public ProgressRepository ProgressRepository => progressRepository;
         public SettingsRepository SettingsRepository => settingsRepository;
 
-        
+
         private Storage _storage;
         private Player _player;
 
         private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
 
             dbConnection.Init();
             userRepository.Init(dbConnection);
@@ -49,25 +56,34 @@ namespace Data
             Data.UserData = user;
             Data.ProgressData = await progressRepository.GetProgress(user.Id);
             Data.SettingsData = await settingsRepository.GetSettings(user.Id);
-            Data.PlanetsData = await planetRepository.GetAllPlanets();
-            Data.AutosData = await autoRepository.GetAllAutos();
+            Data.PlanetsData = await planetRepository.GetAllPlanetTypes();
+            Data.AutosData = await autoRepository.GetAllAutoTypes();
             Data.AvailablePlanetsData = await planetRepository.GetAvailablePlanets(user.Id);
             Data.AvailableAutosData = await autoRepository.GetAvailableAutos(user.Id);
         }
 
-        public void Save()
+        public async UniTask SaveAutos()
         {
-            
+            await autoRepository.Update(Data.UserData.Id, Data.AvailableAutosData);
         }
 
-        public void Load()
+        public async UniTask SavePlanets()
         {
-            
+            await planetRepository.Update(Data.UserData.Id, Data.AvailablePlanetsData);
+        }
+
+        public async UniTask SaveSettings()
+        {
+            await settingsRepository.Update(Data.UserData.Id, Data.SettingsData);
+        }
+
+        public async UniTask SaveProgress()
+        {
+            await progressRepository.Update(Data.UserData.Id, Data.ProgressData);
         }
 
         private void OnApplicationQuit()
         {
-            
         }
     }
 }

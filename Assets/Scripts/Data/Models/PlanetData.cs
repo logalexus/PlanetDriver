@@ -7,5 +7,6 @@
         public int Cost;
         public int Record;
         public int TargetLevel;
+        public bool IsCurrent;
     }
 }

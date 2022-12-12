@@ -14,6 +14,7 @@ public class MainMenuScreen : UIScreen
     [SerializeField] private Button _cars;
     [SerializeField] private Button _store;
     [SerializeField] private Button _settings;
+    [SerializeField] private Button _leaderboard;
     [Header("Fields")]
     [SerializeField] private TextMeshProUGUI _coinCounter;
     [SerializeField] private TextMeshProUGUI _levelCounter;
@@ -51,6 +52,11 @@ public class MainMenuScreen : UIScreen
         _settings.onClick.AddListener(() =>
         {
             uiController.OpenScreen(uiController.GetScreen<SettingsScreen>());
+        });
+        
+        _leaderboard.onClick.AddListener(() =>
+        {
+            uiController.OpenScreen(uiController.GetScreen<LeaderboardScreen>());
         });
 
         player.CoinsChanged += () =>

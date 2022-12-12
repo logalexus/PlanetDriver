@@ -3,7 +3,7 @@
     public class UserData
     {
         public int Id;
-        public string Email;
+        public string Login;
         public string Password;
     }
 }

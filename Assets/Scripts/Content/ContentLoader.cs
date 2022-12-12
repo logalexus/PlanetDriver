@@ -28,11 +28,4 @@ public abstract class ContentLoader<T> : MonoBehaviour where T : Content
         foreach (var name in _availableContents)
             _contentHolder.GetContent(name).Access = true;
     }
-
-    public virtual void SaveAvailableContents(string name)
-    {
-        _availableContents.Add(name);
-        _dataController.Save();
-    }
-
 }

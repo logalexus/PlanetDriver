@@ -21,6 +21,7 @@ namespace UI.Popups
             messageText.text = message;
 
             yesButton.onClick.AddListener(() => action?.Invoke());
+            yesButton.onClick.AddListener(PopupFactory.Instance.ClosePopup);
             noButton.onClick.AddListener(PopupFactory.Instance.ClosePopup);
         }
 

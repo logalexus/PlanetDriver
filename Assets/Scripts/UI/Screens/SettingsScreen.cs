@@ -1,21 +1,24 @@
+using System;
 using DG.Tweening;
 using Lean.Gui;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using Data;
+using MySql.Data.MySqlClient;
+using UI.Popups;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SettingsScreen : UIScreen
 {
     [SerializeField] private SettingsScreenTransition _settingsScreenTransition;
-    [Header("Buttons")]
-    [SerializeField] private Button _back;
-    [Header("Switchers")]
-    [SerializeField] private LeanToggle _musicSwitcher;
+    [Header("Buttons")] [SerializeField] private Button _back;
+    [SerializeField] private Button _logoutButton;
+    [Header("Switchers")] [SerializeField] private LeanToggle _musicSwitcher;
     [SerializeField] private LeanToggle _soundSwitcher;
     [SerializeField] private LeanToggle _postProcSwitcher;
-    [Header("Graphic")]
-    [SerializeField] private GameObject _postProcessing;
+    [Header("Graphic")] [SerializeField] private GameObject _postProcessing;
 
 
     public bool MusicActive
@@ -25,10 +28,11 @@ public class SettingsScreen : UIScreen
         {
             _musicActive = value;
             _dataController.Data.SettingsData.MusicEnable = value;
-            _dataController.Save();
             AudioController.Instance.SetMusicMute(!value);
+            Save();
         }
     }
+
     public bool SoundActive
     {
         get => _soundActive;
@@ -36,10 +40,11 @@ public class SettingsScreen : UIScreen
         {
             _soundActive = value;
             _dataController.Data.SettingsData.SoundEnable = value;
-            _dataController.Save();
             AudioController.Instance.SetSoundMute(!value);
+            Save();
         }
     }
+
     public bool PostProcActive
     {
         get => _postProcActive;
@@ -47,8 +52,8 @@ public class SettingsScreen : UIScreen
         {
             _postProcActive = value;
             _dataController.Data.SettingsData.GraphicQuality = value;
-            _dataController.Save();
             _postProcessing.SetActive(value);
+            Save();
         }
     }
 
@@ -62,11 +67,10 @@ public class SettingsScreen : UIScreen
     {
         UIController uiController = UIController.Instance;
         _dataController = DataController.Instance;
-        
-        _back.onClick.AddListener(() =>
-        {
-            uiController.OpenScreen(uiController.GetScreen<MainMenuScreen>());
-        });
+
+        _back.onClick.AddListener(() => { uiController.OpenScreen(uiController.GetScreen<MainMenuScreen>()); });
+
+        _logoutButton.onClick.AddListener(() => SceneManager.LoadScene("Login"));
 
         StartCoroutine(InitSettings());
     }
@@ -74,12 +78,12 @@ public class SettingsScreen : UIScreen
     private IEnumerator InitSettings()
     {
         yield return null;
-        MusicActive = _dataController.Data.SettingsData.MusicEnable;
-        SoundActive = _dataController.Data.SettingsData.SoundEnable;
-        PostProcActive = _dataController.Data.SettingsData.GraphicQuality;
-        _musicSwitcher.On = MusicActive;
-        _soundSwitcher.On = SoundActive;
-        _postProcSwitcher.On = PostProcActive;
+        _musicActive = _dataController.Data.SettingsData.MusicEnable;
+        _soundActive = _dataController.Data.SettingsData.SoundEnable;
+        _postProcActive = _dataController.Data.SettingsData.GraphicQuality;
+        _musicSwitcher.On = _musicActive;
+        _soundSwitcher.On = _soundActive;
+        _postProcSwitcher.On = _postProcActive;
     }
 
     public override void Open()
@@ -91,5 +95,20 @@ public class SettingsScreen : UIScreen
     public override void Close()
     {
         _settingsScreenTransition.CloseAnim().OnComplete(() => { base.Close(); });
+    }
+
+    private async UniTask Save()
+    {
+        PopupFactory.Instance.ShowLoadingPopup();
+        try
+        {
+            await _dataController.SaveSettings();
+            PopupFactory.Instance.ClosePopup();
+        }
+        catch (MySqlException e)
+        {
+            PopupFactory.Instance.ShowInfoPopup(e.Message);
+            throw;
+        }
     }
 }

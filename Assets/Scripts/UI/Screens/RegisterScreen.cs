@@ -47,22 +47,22 @@ public class RegisterScreen : UIScreen
     {
         if (InputValid())
         {
-            string email = mailInput.text;
+            string login = mailInput.text;
             string password = Utilities.GetHash(passwordInput.text);
 
             _popupFactory.ShowLoadingPopup();
             try
             {
-                if (await _userRepository.CheckExistEmail(email))
+                if (await _userRepository.CheckExistEmail(login))
                 {
-                    _popupFactory.ShowInfoPopup("Email already exists");
+                    _popupFactory.ShowInfoPopup("Login already exists");
                     return;
                 }
 
-                int userId = await _userRepository.AddUser(email, password);
+                int userId = await _userRepository.AddUser(login, password);
 
-                await _planetRepository.AddPlanetToUser(userId, 1);
-                await _autoRepository.AddAutoToUser(userId, 1);
+                await _planetRepository.AddPlanetToUser(userId, 1, true);
+                await _autoRepository.AddAutoToUser(userId, 1, true);
                 await _progressRepository.AddProgress(userId, 1000, 1, 0);
                 await _settingsRepository.AddSettings(userId, true, true, false);
                 
@@ -87,12 +87,12 @@ public class RegisterScreen : UIScreen
 
     private bool InputValid()
     {
-        bool mailValid = !string.IsNullOrEmpty(mailInput.text);
+        bool loginValid = !string.IsNullOrEmpty(mailInput.text);
         bool passwordValid = !string.IsNullOrEmpty(passwordInput.text);
         bool repeatedPasswordValid = !string.IsNullOrEmpty(repeatedPasswordInput.text);
         bool passwordMuch = passwordInput.text == repeatedPasswordInput.text;
 
-        if (!mailValid || !passwordValid || !repeatedPasswordValid)
+        if (!loginValid || !passwordValid || !repeatedPasswordValid)
         {
             _popupFactory.ShowInfoPopup("Not valid input");
             return false;

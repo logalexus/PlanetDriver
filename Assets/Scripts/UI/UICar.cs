@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Cysharp.Threading.Tasks;
+using Data;
+using Data.Models;
+using MySql.Data.MySqlClient;
 using TMPro;
+using UI.Popups;
 using UnityEngine.UI;
 
 public class UICar : MonoBehaviour
@@ -8,69 +13,105 @@ public class UICar : MonoBehaviour
     [SerializeField] private GameObject _accessPanel;
     [SerializeField] private Image _carPreview;
     [SerializeField] private WarningAnimation _mapWarning;
-    [Header("Fields")]
-    [SerializeField] private TextMeshProUGUI _name;
+    [Header("Fields")] [SerializeField] private TextMeshProUGUI _name;
     [SerializeField] private TextMeshProUGUI _cost;
-    [Header("Buttons")]
-    [SerializeField] private Button _selectButton;
-    
+    [Header("Buttons")] [SerializeField] private Button _selectButton;
+
     private Car _car;
-    private UIController uIController;
+    private UIController _uiController;
+    private PopupFactory _popupFactory;
+    private Player _player;
+    private DataController _dataController;
+    private AutoData _autoData;
+    private bool _access;
 
     public bool AccessCar
     {
-        get => _car.Access;
+        get => _access;
         set
         {
-            _car.Access = value;
+            _access = value;
             _accessPanel.SetActive(value);
         }
     }
 
-    private void Start()
+    public void Init(CarsHolder carsHolder, AutoData autoData)
     {
-        Player player = Player.Instance;
-        uIController = UIController.Instance;
+        _player = Player.Instance;
+        _uiController = UIController.Instance;
+        _dataController = DataController.Instance;
+        _popupFactory = PopupFactory.Instance;
+        _autoData = autoData;
 
-        _selectButton.onClick.AddListener(() =>
-        {
-            if (_car.Access)
-                ShowCar();
-            else
-            {
-                if (player.Coins >= _car.Cost)
-                {
-                    uIController.PopupCall(() =>
-                    {
-                        player.Coins -= _car.Cost;
-                        AccessCar = true;
-                    });
-                    CarsLoader.Instance.SaveAvailableContents(_car.Name);
-                }
-                else
-                {
-                    _selectButton.interactable = false;
-                    _mapWarning.StartAnimation(()=> _selectButton.interactable = true);
-                }
-            }
+        AccessCar = _dataController.Data.AvailableAutosData.Exists(x => x.Name == _autoData.Name);
 
-        });
+        _car = carsHolder.GetContent(_autoData.Name);
+        _name.text = _autoData.Name;
+        _cost.text = _autoData.Cost.ToString();
+        _carPreview.sprite = _car.Preview;
+
+        _selectButton.onClick.AddListener(OnClickCar);
     }
 
-    public void SetMapUI(Car car)
+    private void OnClickCar()
     {
-        _car = car;
-        _name.text = car.Name;
-        _cost.text = car.Cost.ToString();
-        _carPreview.sprite = car.Preview;
-        //_carPreview.SetNativeSize();
-        _accessPanel.SetActive(_car.Access);
+        if (AccessCar)
+            ShowCar();
+        else
+        {
+            if (_player.Coins >= _autoData.Cost)
+            {
+                _popupFactory.ShowApprovePopup("Are you sure?", "Warning", () => Buy());
+            }
+            else
+            {
+                _selectButton.interactable = false;
+                _mapWarning.StartAnimation(() => _selectButton.interactable = true);
+            }
+        }
+    }
+
+    private async UniTask Buy()
+    {
+        _player.Coins -= _autoData.Cost;
+        AccessCar = true;
+
+        PopupFactory.Instance.ShowLoadingPopup();
+        try
+        {
+            await _dataController.SaveProgress();
+            await _dataController.AutoRepository.AddAutoToUser(_dataController.Data.UserData.Id, _autoData.IdAutoType,
+                false);
+            _dataController.Data.AvailableAutosData.Add(_autoData);
+            PopupFactory.Instance.ClosePopup();
+        }
+        catch (MySqlException e)
+        {
+            PopupFactory.Instance.ShowInfoPopup(e.Message);
+            throw;
+        }
     }
 
     private void ShowCar()
     {
-        CarsLoader.Instance.SetContent(_car);
-        uIController.OpenScreen(uIController.GetScreen<MainMenuScreen>());
+        CarsLoader.Instance.SetContent(_autoData);
+        _uiController.OpenScreen(_uiController.GetScreen<MainMenuScreen>());
+        SaveCurrent();
     }
 
+
+    private async UniTask SaveCurrent()
+    {
+        PopupFactory.Instance.ShowLoadingPopup();
+        try
+        {
+            await _dataController.SaveAutos();
+            PopupFactory.Instance.ClosePopup();
+        }
+        catch (MySqlException e)
+        {
+            PopupFactory.Instance.ShowInfoPopup(e.Message);
+            throw;
+        }
+    }
 }

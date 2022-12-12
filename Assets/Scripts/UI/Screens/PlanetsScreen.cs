@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Data;
 using UnityEngine;
 using DG.Tweening;
+using MySql.Data.MySqlClient;
 using UnityEngine.UI;
 using TMPro;
+using UI.Popups;
 using UnityEngine.UI.Extensions;
 
 public class PlanetsScreen : UIScreen
@@ -12,7 +15,7 @@ public class PlanetsScreen : UIScreen
     [SerializeField] private PlanetsScreenTransition _planetsScreenTransition;
     [SerializeField] private MapsHolder _mapsHolder;
     [SerializeField] private UIMap _uiMap;
-    [SerializeField] private VerticalScrollSnap _scroller;
+    [SerializeField] private Transform uiPlanetContainer;
     [Header("Buttons")] 
     [SerializeField] private Button _back;
     [Header("Fields")] 
@@ -45,20 +48,18 @@ public class PlanetsScreen : UIScreen
     {
         _planetsScreenTransition.CloseAnim().OnComplete(() =>
         {
-            _scroller.GoToScreen(_mapsHolder.Contents.Count - 1);
             base.Close();
         });
     }
 
     private void SetMapsUI()
     {
-        for (int i = _mapsHolder.Contents.Count - 1; i >= 0; i--)
+        for (int j = 0; j < _dataController.Data.PlanetsData.Count ; j++)
         {
-            UIMap mapUI = Instantiate(_uiMap);
-            mapUI.Init(_mapsHolder, _dataController.Data.PlanetsData[i]);
-            _scroller.AddChild(mapUI.gameObject);
+            UIMap mapUI = Instantiate(_uiMap, uiPlanetContainer);
+            mapUI.Init(_mapsHolder, _dataController.Data.PlanetsData[j]);
         }
-
-        _scroller.GoToScreen(_mapsHolder.Contents.Count - 1);
     }
+    
+    
 }
